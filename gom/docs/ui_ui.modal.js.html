@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ui/ui.modal.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">首页 Home</a></h2><h3>类Classes</h3><ul><li><a href="Gom.html">Gom</a><ul class='methods'><li data-type='method'><a href="Gom.html#.Utils">Utils</a></li></ul></li><li><a href="Gom.App.html">App</a><ul class='methods'><li data-type='method'><a href="Gom.App.html#getCRO">getCRO</a></li><li data-type='method'><a href="Gom.App.html#getLastHashByLastIndex">getLastHashByLastIndex</a></li><li data-type='method'><a href="Gom.App.html#goto">goto</a></li><li data-type='method'><a href="Gom.App.html#run">run</a></li><li data-type='method'><a href="Gom.App.html#setCRO">setCRO</a></li></ul></li><li><a href="Gom.Page.html">Page</a><ul class='methods'><li data-type='method'><a href="Gom.Page.html#destory">destory</a></li><li data-type='method'><a href="Gom.Page.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.Page.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.Page.html#offview">offview</a></li><li data-type='method'><a href="Gom.Page.html#onview">onview</a></li><li data-type='method'><a href="Gom.Page.html#push">push</a></li><li data-type='method'><a href="Gom.Page.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.Page.html#render">render</a></li><li data-type='method'><a href="Gom.Page.html#setHeader">setHeader</a></li><li data-type='method'><a href="Gom.Page.html#setSeo">setSeo</a></li><li data-type='method'><a href="Gom.Page.html#show">show</a></li><li data-type='method'><a href="Gom.Page.html#update">update</a></li></ul></li><li><a href="Gom.Service.html">Service</a><ul class='methods'><li data-type='method'><a href="Gom.Service.html#ajax">ajax</a></li><li data-type='method'><a href="Gom.Service.html#fetch">fetch</a></li><li data-type='method'><a href="Gom.Service.html#get">get</a></li><li data-type='method'><a href="Gom.Service.html#jsonp">jsonp</a></li><li data-type='method'><a href="Gom.Service.html#post">post</a></li><li data-type='method'><a href="Gom.Service.html#save">save</a></li><li data-type='method'><a href="Gom.Service.html#tmpl">tmpl</a></li></ul></li><li><a href="Gom.UI.html">UI</a></li><li><a href="Gom.UI.Button.html">Button</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Button.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Button.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Button.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Button.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Button.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Button.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Button.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Button.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Button.html#update">update</a></li></ul></li><li><a href="Gom.UI.Form.html">Form</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Form.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Form.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Form.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Form.html#getStore">getStore</a></li><li data-type='method'><a href="Gom.UI.Form.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Form.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Form.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Form.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Form.html#setStore">setStore</a></li><li data-type='method'><a href="Gom.UI.Form.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Form.html#update">update</a></li></ul></li><li><a href="Gom.UI.Header.html">Header</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Header.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Header.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Header.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Header.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Header.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Header.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Header.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Header.html#setTitle">setTitle</a></li><li data-type='method'><a href="Gom.UI.Header.html#setTitle">setTitle</a></li><li data-type='method'><a href="Gom.UI.Header.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Header.html#update">update</a></li></ul></li><li><a href="Gom.UI.InputLocation.html">InputLocation</a><ul class='methods'><li data-type='method'><a href="Gom.UI.InputLocation.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#render">render</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#show">show</a></li><li data-type='method'><a href="Gom.UI.InputLocation.html#update">update</a></li></ul></li><li><a href="Gom.UI.List.html">List</a><ul class='methods'><li data-type='method'><a href="Gom.UI.List.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.List.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.List.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.List.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.List.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.List.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.List.html#render">render</a></li><li data-type='method'><a href="Gom.UI.List.html#show">show</a></li><li data-type='method'><a href="Gom.UI.List.html#update">update</a></li></ul></li><li><a href="Gom.UI.Modal.html">Modal</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Modal.html#.alert">alert</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.bottom">bottom</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.bottom">bottom</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.center">center</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.confirm">confirm</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.layout">layout</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.loading">loading</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.popover">popover</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.tips">tips</a></li><li data-type='method'><a href="Gom.UI.Modal.html#.top">top</a></li><li data-type='method'><a href="Gom.UI.Modal.html#autoHide">autoHide</a></li><li data-type='method'><a href="Gom.UI.Modal.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Modal.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Modal.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Modal.html#getMask">getMask</a></li><li data-type='method'><a href="Gom.UI.Modal.html#getModal">getModal</a></li><li data-type='method'><a href="Gom.UI.Modal.html#getType">getType</a></li><li data-type='method'><a href="Gom.UI.Modal.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Modal.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Modal.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Modal.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Modal.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Modal.html#toggleModal">toggleModal</a></li><li data-type='method'><a href="Gom.UI.Modal.html#update">update</a></li></ul></li><li><a href="Gom.UI.Radio.html">Radio</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Radio.html#fresh">fresh</a></li><li data-type='method'><a href="Gom.UI.Radio.html#fresh">fresh</a></li><li data-type='method'><a href="Gom.UI.Radio.html#fresh">fresh</a></li><li data-type='method'><a href="Gom.UI.Radio.html#getItem">getItem</a></li><li data-type='method'><a href="Gom.UI.Radio.html#getItem">getItem</a></li></ul></li><li><a href="Gom.UI.Scroll.html">Scroll</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Scroll.html#getSteps">getSteps</a></li><li data-type='method'><a href="Gom.UI.Scroll.html#hideFresh">hideFresh</a></li><li data-type='method'><a href="Gom.UI.Scroll.html#scrollTo">scrollTo</a></li><li data-type='method'><a href="Gom.UI.Scroll.html#showFresh">showFresh</a></li></ul></li><li><a href="Gom.UI.Select.html">Select</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Select.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Select.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Select.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Select.html#getSelect">getSelect</a></li><li data-type='method'><a href="Gom.UI.Select.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Select.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Select.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Select.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Select.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Select.html#update">update</a></li></ul></li><li><a href="Gom.UI.Sides.html">Sides</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Sides.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Sides.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Sides.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Sides.html#getSides">getSides</a></li><li data-type='method'><a href="Gom.UI.Sides.html#hide">hide</a></li><li data-type='method'><a href="Gom.UI.Sides.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Sides.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Sides.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Sides.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Sides.html#setContent">setContent</a></li><li data-type='method'><a href="Gom.UI.Sides.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Sides.html#update">update</a></li></ul></li><li><a href="Gom.UI.Slide.html">Slide</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Slide.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Slide.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Slide.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Slide.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Slide.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Slide.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Slide.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Slide.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Slide.html#update">update</a></li></ul></li><li><a href="Gom.UI.Toggle.html">Toggle</a><ul class='methods'><li data-type='method'><a href="Gom.UI.Toggle.html#destory">destory</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#offview">offview</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#onview">onview</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#render">render</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#show">show</a></li><li data-type='method'><a href="Gom.UI.Toggle.html#update">update</a></li></ul></li><li><a href="Gom.View.html">View</a><ul class='methods'><li data-type='method'><a href="Gom.View.html#.template">template</a></li><li data-type='method'><a href="Gom.View.html#destory">destory</a></li><li data-type='method'><a href="Gom.View.html#getHTMLFragment">getHTMLFragment</a></li><li data-type='method'><a href="Gom.View.html#getHTMLTmpl">getHTMLTmpl</a></li><li data-type='method'><a href="Gom.View.html#offview">offview</a></li><li data-type='method'><a href="Gom.View.html#onview">onview</a></li><li data-type='method'><a href="Gom.View.html#refreshEvent">refreshEvent</a></li><li data-type='method'><a href="Gom.View.html#render">render</a></li><li data-type='method'><a href="Gom.View.html#show">show</a></li><li data-type='method'><a href="Gom.View.html#update">update</a></li></ul></li></ul><h3>命名空间 Namespaces</h3><ul><li><a href="store.html">store</a><ul class='methods'><li data-type='method'><a href="store.html#.del">del</a></li><li data-type='method'><a href="store.html#.del">del</a></li><li data-type='method'><a href="store.html#.each">each</a></li><li data-type='method'><a href="store.html#.get">get</a></li><li data-type='method'><a href="store.html#.has">has</a></li><li data-type='method'><a href="store.html#.noexpire">noexpire</a></li><li data-type='method'><a href="store.html#.size">size</a></li></ul></li><li><a href="url.html">url</a><ul class='methods'><li data-type='method'><a href="url.html#.getHashPath">getHashPath</a></li><li data-type='method'><a href="url.html#.getHashSearch">getHashSearch</a></li><li data-type='method'><a href="url.html#.getHTML5Hash">getHTML5Hash</a></li><li data-type='method'><a href="url.html#.getParams">getParams</a></li><li data-type='method'><a href="url.html#.getUrl">getUrl</a></li><li data-type='method'><a href="url.html#.set">set</a></li><li data-type='method'><a href="url.html#.setParam">setParam</a></li></ul></li></ul><h3>Global 全局</h3><ul><li><a href="global.html#easingMap">easingMap</a></li><li><a href="global.html#re">re</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#swipe">swipe</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">ui/ui.modal.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import $ from '../utils/fx';
+import View from '../core/view';
+
+let defaultData = {
+    type: 'loading', //alert, confirm, topup, top, bottom,
+    btns: {
+        yes: '确定',
+        no:  '取消'
+    },
+    title: '',
+    content: '',   //content为str或html,如果为function则需要返回str或html
+    class: '',
+    mask: true
+};
+
+const noop = function(){};
+/**
+ * 弹层底层抽象类，如果需要自定义弹出层才需要用到, 自定义一般于Modal.layout，不满足才需要用到此类
+ * 弹层层的家庭比较大，有Loading，confirm， alert, center, popover, tips, popup, top , bottom, toast
+ * 所有弹出层不可共存，但modal与toast可一起显示.
+ *  @class Gom.UI.Modal
+ *  @alias Modal
+ *  @extends {Gom.View}
+ *  @param {object} opts 传入的opts参数，会覆盖static默认参数
+ *  @param {string} [opts.type]  自定义GomUI不存在的弹出层组件时才需要指定
+ *  @param {string} [opts.title] 弹层标题
+ *  @param {html|string} [opts.content] 弹层的html内部
+ *  @param {string} [opts.class] 弹层自定义class
+ *  @param {boolean} [opts.mask=false] 弹层是否显示遮罩
+ *  @param {boolean} [opts.close] 当且仅当为true时会在右上角显示关闭小图标
+ *  @param {object} [opts.btns]  弹出层组件时按钮
+ *  @param {string} [opts.btns.yes] 确定按钮名称
+ *  @param {string} [opts.btns.no]  取消按钮名称
+ *  @example opts对象可传入的有如下对象，如果opts为string时，则表示为opts.content
+ *  {  type: '',  //在具体实例中已定义，扩展时可自定义名称
+       btns: {
+            yes: '确定',
+            no:  '取消'
+        },
+        title: '',
+        content: '',   //content为str或html,如果为function则需要返回str或html
+        class: '',
+        mask: true,
+        onYes: function(){},
+        onNo: function(){}
+        }
+ */
+class Modal extends View {
+    constructor  (opts) {
+        var data = opts.data = $.extend({}, defaultData, opts.data);
+        opts.tmplname = 'ui.modal';
+        super(opts);
+        this.onYes = data.onYes || noop;
+        this.onNo = data.onNo || noop;
+        this.mask = data.mask;
+    }
+    render (){
+        let [wrap, frag] = [$('body'), this.getHTMLFragment()];
+
+        if(this.wrapper.length){
+            this.wrapper.html(frag);
+            this.show();
+            return this;
+        }
+
+        let modal = this.getModal();
+        if(!modal.length){
+            wrap.append(frag);
+        }else{
+            modal.replaceWith(frag);
+        }
+        this.show();
+        return this;
+    }
+    /**
+     * 显示弹层
+     * @method Gom.UI.Modal#show
+     */
+    show  (){
+        this.reloc();
+        this.toggleModal();
+
+        if(this.is('toast')){
+            this.autoHide(3000);
+        }
+        this.initEvents();
+    }
+    initEvents (){
+        var that = this, $t;
+        $('.modal-layout').off().on('click', '.modal-btn, .icon-close', function(){
+            $t = $(this);
+            if($t.hasClass('modal-btn-yes')){
+                that._onYes();
+            }else if($t.hasClass('modal-btn-no') || $t.hasClass('icon-close')){
+                that._onNo();
+            }
+        });
+        $('.modal-overlay').off().click(function(){
+            that._onYes();
+        });
+    }
+    /**
+     * 获取弹出层类型，即data.type
+     * @method Gom.UI.Modal#getType
+     */
+    getType (){
+        return this.data.type;
+    }
+    is (type){
+        return this.getType().indexOf(type)!==-1;
+    }
+    isTopBot (){
+        var type =  this.getType();
+        var is = (type ==='top' || type==='bottom');
+        return is ? type : is;
+    }
+    /**
+     * 获取弹层elements
+     * @method Gom.UI.Modal#getModal
+     * @returns {*|jQuery|HTMLElement}
+     */
+    getModal (){
+        let $el = this.wrapper.length ? this.wrapper : $('body');
+        let ist = this.is('toast'), isl = this.is('loading');
+        if(ist) return $el.find('> .modal-toast');
+        if(isl) return $el.find('> .modal-loading');
+        return $el.find('> .modal-layout');
+    }
+    /**
+     * 获取遮罩层
+     * @method Gom.UI.Modal#getMask
+     * @returns {*|jQuery|HTMLElement}
+     */
+    static getMask (){
+        return $('.modal-overlay');
+    }
+    /**
+     * 判断显示与隐藏及相应动画
+     * @method Gom.UI.Modal#toggleModal
+     * @param {string} [inout=In] in|显+out|隐
+     * @desc 上下弹出层会采用slide+fade动画，其它采用scale+fade
+     */
+    toggleModal (inout){
+        inout = inout || 'In';
+        var pos = this.isTopBot();
+        if(pos){
+            this['slide'+inout+'Modal'](pos);
+        }else{
+            this['scale'+inout+'Modal']();
+        }
+
+        console.log(Modal.getMask(), this.mask, 'mask');
+        if(this.mask){
+            Modal.getMask()[inout==='In'?'addClass':'removeClass']('modal-overlay-visible');
+        }
+    }
+    scaleInModal (){
+        let size = 1, dsize = this.data.size;
+        if(dsize) size = dsize;
+        this.getModal().css({opacity: 0.8, transform: 'scale(1.2)'}).fx({opacity: 1, scale: size, perspective:1000}, 500, 'easeOutCirc');
+    }
+    scaleOutModal (){
+        var $gm = this.getModal();
+        $gm.fx({opacity: 0, scale: 0.8, perspective:1000}, 300, 'easeOutCirc', function(){
+            $gm.remove();
+        });
+    }
+    slideInModal (){
+        this.getModal().fx({opacity: 1, translate3d: '0,0,0', perspective:1000}, 500, 'easeOutCirc');
+    }
+    slideOutModal (){
+        var $gm = this.getModal();
+        $gm.fx({opacity: 0.5, translate3d: '0,100%,0', perspective:1000}, 500, 'easeOutCirc', function(){
+            $gm.remove();
+        });
+    }
+    /**
+     * 重置为动画前状态, 会根据modal所处的位置重置modal会置
+     * @method Gom.UI.Modal#reloc
+     * @private
+     */
+    reloc (){
+        var ml = this.getModal(), isTB = this.isTopBot(),
+            h = ml.height(), centerProps={};
+        if(!isTB){
+            centerProps['margin-top'] = -h/2;
+        }
+        ml.css(centerProps);
+    }
+    remove (){
+        this.getModal().remove();
+    }
+    /**
+     * 经过times millseconds 自动隐藏弹层
+     * @method  Gom.UI.Modal#autoHide
+     * @param {number} times 毫秒数
+     */
+    autoHide (times){
+        var that = this;
+        var time = setTimeout(function(){
+            that.toggleModal('Out');
+            clearTimeout(time);}, times);
+    }
+    _onYes (){
+        this.onYes();
+        this.toggleModal('Out');
+    }
+    _onNo (){
+        this.onNo();
+        this.toggleModal('Out');
+    }
+}
+
+let Modals = {
+    /**
+     * 此方法一般用于自定义弹出层组件, 抽象类Modal的抽象实例
+     * @method Gom.UI.Modal.layout
+     * @param {object} statics 默认参数
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts
+     *                              传入的opts参数为string时，则表示为opts.content
+     * @param {string} type 弹出层对象的名称
+     *  opts对象可传入的有如下对象，如果opts为string时，则表示为opts.content
+     * @return {Modal} 弹出层实例
+     */
+    layout (statics, opts, type){
+        let optsObj = {};
+        if(typeof opts === 'string'){
+            optsObj.content = opts;
+        }else{
+            optsObj = opts;
+        }
+
+        return new Modal({data: $.extend({}, statics, optsObj, {type: type})});
+    },
+    /**
+     * 显示警告框
+     * @method Gom.UI.Modal.alert
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts
+     *                              传入的opts参数为string时，则表示为opts.content
+     * @return {Modal} 弹出层实例
+     */
+    alert (opts){
+        const alertStatic = {
+            title: opts.title || '警告:',
+            btns: {
+                yes: 'OK'
+            }
+        };
+        return this.layout(alertStatic, opts, 'alert').render();
+    },
+    /**
+     * 显示对话框
+     * @method Gom.UI.Modal.confirm
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts
+     *                              传入的opts参数为string时，则表示为opts.content
+     * @return {Modal} 弹出层实例
+     */
+    confirm (opts){
+        const confirmStatic = {
+            title: opts.title || '请确认:',
+            btns: {
+                yes: '确定', no: '取消'
+            }
+        };
+        return  this.layout(confirmStatic, opts, 'confirm').render();
+    },
+    /**
+     * 显示loading
+     * @method Gom.UI.Modal.loading
+     * @param {boolean} mask 是否需要 mask
+     * @param {string} [preload=''] loading放入的位置,没有此值则为全局loading
+     * @param {number} size loading的大小， 最好是0-1之间的比例;
+     */
+    loading (mask, preload, size){
+        return new Modal({
+            wrapper: preload,
+            data:{
+                type: 'loading',
+                btns: false,
+                title: false,
+                mask: mask,
+                size: size
+            }
+        });
+    },
+    /**
+     * 显示对话框
+     * @method Gom.UI.Modal.center
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts
+     *                              传入的opts参数为string时，则表示为opts.content
+     * @return {Modal} 弹出层实例
+     */
+    center:function(opts){
+        const confirmStatic = {
+            title: opts.title || '',
+            btns: false
+        };
+        return  this.layout(confirmStatic, opts, 'center').render();
+    },
+    /**
+     * 显示 top layout
+     * @method Gom.UI.Modal.top
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts
+     *                              传入的opts参数为string时，则表示为opts.content
+     * @return {Modal} 弹出层实例
+     */
+    top (opts){
+        const bottomStatic = {
+            title: opts.title || '',
+            btns: false,
+            mask: false,
+            close: true
+        };
+        return this.layout(bottomStatic, opts, 'top').render();
+    },
+    /**
+     * 显示 bottom layout
+     * @method Gom.UI.Modal.bottom
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts
+     *                              传入的opts参数为string时，则表示为opts.content
+     * @return {Modal} 弹出层实例
+     */
+    bottom (opts){
+        //比如下面的时间选择器， ACTIONSHEET等
+        const bottomStatic = {
+            title: opts.title || '',
+            btns: {
+                no: '取消',
+                yes: '完成'
+            }
+        };
+        return this.layout(bottomStatic, opts, 'bottom').render();
+    },
+    /**
+     * popup 较类似于bottom,只不过是全屏的 :)
+     * @method Gom.UI.Modal.bottom
+     */
+    popup (opts){
+        const popupStatic = {
+            title: opts.title || '',
+            class: 'modal-popup',
+            btns: {
+                yes: 'OK',
+                no: '取消'
+            }
+        };
+        return this.layout(popupStatic, opts, 'bottom').render();
+    },
+    /**
+     * 显示 popover layout
+     * @method Gom.UI.Modal.popover
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts 传入的opts参数为string时，则表示为opts.content
+     * @param {object|string} opts.bindElem 弹出层绑定的元素（位置）
+     */
+    popover (opts){
+        const popoverStatic = {
+            title: '',
+            btns: false
+        };
+        if(!opts.bindElem){
+            console.warn('没有定义popover弹出层绑定的元素');
+            return;
+        }else{
+            var $bindElem = $(opts.bindElem),
+                pos = $bindElem.offset();
+        }
+        var popover = this.layout(popoverStatic, opts, 'popover').render();
+        var trisize = 20, tripos = 'tri-bottom',
+            $modal = popover.getModal(), mw = $modal.width(), mh = $modal.height(),
+            top = pos.top - mh/2 - trisize/2,
+            left = pos.left+(pos.width-mw)/2,
+            fullWidth = $('body').width(), gap = 10;
+
+        if(pos.top&lt; mh){
+            top = pos.top + mh/2 + trisize;
+            tripos = 'tri-top';
+        }
+        if(left &lt; gap){
+            left = gap;
+            tripos += ' tri-left';
+        }else if(left>fullWidth-mw-gap){
+            left = fullWidth-mw-gap;
+            tripos += ' tri-right';
+        }
+        $modal.addClass(tripos).css({
+            left: left,
+            top: top
+        });
+
+        return popover;
+    },
+    /**
+     * 显示 tips,实质就是popover，加上tips的样式而已(啊？不好意思暂不能多开，原因，你猜！)
+     * @method Gom.UI.Modal.tips
+     * @param {object|string} opts 传入的opts参数为object时，会覆盖static默认参数, opts参数:@see Gom.UI.Modal#opts 传入的opts参数为string时，则表示为opts.content
+     * @param {object|string} opts.bindElem 弹出层绑定的元素（位置）
+     * @return {Modal} 弹出层实例
+     */
+    tips (opts){
+        $.extend(opts, {'class': 'modal-tips', mask: false});
+        this.popover(opts);
+    },
+    /**
+     * 显示不同类型的弹出提示
+     * @param {string} content 显示的内容;
+     * @param {string} toastType 显示类别，有 warn info error, 默认info;
+     * @return {Modal} 弹出层实例
+     */
+    toast (content, toastType){
+        console.log(content, '--------' , toastType, 'test');
+        toastType = toastType || 'info';
+        return new Modal({
+            data:{
+                type: 'toast-'+toastType,
+                content: content,
+                btns: false,
+                title: false,
+                mask: false
+            }
+        }).render();
+    }
+};
+
+export {Modal, Modals};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.0-dev</a> on Sun Jan 17 2016 16:54:24 GMT+0800 (CST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

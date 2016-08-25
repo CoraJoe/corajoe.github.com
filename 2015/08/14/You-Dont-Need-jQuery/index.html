@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>You Dont Need jQuery | CCJoe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="This Content is Come From http://blog.garstasio.com/you-dont-need-jquery/在这里仅仅是翻译或是总结下常归的方法：
+你不再需要jQuery在许多方面很多开发者非常依赖jQuery, jQuery在保证浏览器兼容性和优雅的Api让javascript更易用，但是如果没有jQuery,一切也不会显示那么糟糕！以下是一些常见的替代方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="You Dont Need jQuery">
+<meta property="og:url" content="http://ccjoe.github.io/2015/08/14/You-Dont-Need-jQuery/index.html">
+<meta property="og:site_name" content="CCJoe">
+<meta property="og:description" content="This Content is Come From http://blog.garstasio.com/you-dont-need-jquery/在这里仅仅是翻译或是总结下常归的方法：
+你不再需要jQuery在许多方面很多开发者非常依赖jQuery, jQuery在保证浏览器兼容性和优雅的Api让javascript更易用，但是如果没有jQuery,一切也不会显示那么糟糕！以下是一些常见的替代方法">
+<meta property="og:updated_time" content="2016-03-30T05:13:41.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="You Dont Need jQuery">
+<meta name="twitter:description" content="This Content is Come From http://blog.garstasio.com/you-dont-need-jquery/在这里仅仅是翻译或是总结下常归的方法：
+你不再需要jQuery在许多方面很多开发者非常依赖jQuery, jQuery在保证浏览器兼容性和优雅的Api让javascript更易用，但是如果没有jQuery,一切也不会显示那么糟糕！以下是一些常见的替代方法">
+  
+    <link rel="alternative" href="/atom.xml" title="CCJoe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ccjoe.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Joe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">那时候，车，马，朝阳...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/cao">每日糙点</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/build/" style="font-size: 12.5px;">build</a> <a href="/tags/co/" style="font-size: 10px;">co</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross-domain</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/flux/" style="font-size: 10px;">flux</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/gulp/" style="font-size: 12.5px;">gulp</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mvc/" style="font-size: 20px;">mvc</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/passport/" style="font-size: 10px;">passport</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/regExp/" style="font-size: 10px;">regExp</a> <a href="/tags/rest/" style="font-size: 12.5px;">rest</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/thunk/" style="font-size: 10px;">thunk</a> <a href="/tags/webapp/" style="font-size: 15px;">webapp</a> <a href="/tags/web优化/" style="font-size: 10px;">web优化</a> <a href="/tags/便笺/" style="font-size: 10px;">便笺</a> <a href="/tags/影评/" style="font-size: 10px;">影评</a> <a href="/tags/性能分析/" style="font-size: 10px;">性能分析</a> <a href="/tags/投资/" style="font-size: 10px;">投资</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/组件化/" style="font-size: 12.5px;">组件化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://developer.mozilla.org/zh-CN/">MDN</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.github.com/">Github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">理无常是，事无常非。 里面很多文章都是半完成式或在完善相关主题，仅作为作者整理思路， 读者见谅。</div>
+				</section>
+				
+			</div>
+
+		</div>
+			<div style="position:absolute; top:550px; width:100%; font-size:12px; line-height:22px;">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><a>所有皆原创</a> <br> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+			</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Joe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Joe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">那时候，车，马，朝阳...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/cao">每日糙点</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-You-Dont-Need-jQuery" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/14/You-Dont-Need-jQuery/" class="article-date">
+  	<time datetime="2015-08-14T03:20:25.000Z" itemprop="datePublished">2015-08-14</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      You Dont Need jQuery
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jquery/">jquery</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="This-Content-is-Come-From-http-blog-garstasio-com-you-dont-need-jquery">This Content is Come From <a href="http://blog.garstasio.com/you-dont-need-jquery/" target="_blank" rel="external">http://blog.garstasio.com/you-dont-need-jquery/</a></h2><p>在这里仅仅是翻译或是总结下常归的方法：</p>
+<h2 id="你不再需要jQuery">你不再需要jQuery</h2><p>在许多方面很多开发者非常依赖jQuery, jQuery在保证浏览器兼容性和优雅的Api让javascript更易用，但是如果没有jQuery,一切也不会显示那么糟糕！以下是一些常见的替代方法，这更有助于理解原生的Javascript</p>
+<h2 id="元素选择">元素选择</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ =&gt; <span class="built_in">document</span>.<span class="built_in">querySelectorAll</span> <span class="comment">//IE8+</span></span><br></pre></td></tr></table></figure>
+<h3 id="Classes-Tag-属性-伪元素">Classes,Tag,属性,伪元素</h3><p>jquery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'selector'</span>);</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>Dom API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'test'</span>);  <span class="comment">//ID</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">'test'</span>);  <span class="comment">//Class</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>);  <span class="comment">//Tag</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'[attr="attrval"]'</span>);  <span class="comment">//Attr</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'input:disabled'</span>);  <span class="comment">//Pseudo Class</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="子集">子集</h3><p>jquery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'selector'</span>).children();</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#myParent'</span>).children(<span class="string">'[ng-click]'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>DOM API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//包含注释和文本节点 IE5.5+</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'selector'</span>).childNodes();</span><br><span class="line"><span class="comment">//不包含注释和文本节点 IE9+</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'selector'</span>).children;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'#myParent [ng-click]'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="排除元素">排除元素</h3><p>  jquery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'DIV'</span>).not(<span class="string">'.ignore'</span>);</span><br><span class="line">$(<span class="string">'DIV:not(.ignore)'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>DOM API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//IE9+</span></span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'DIV:not(.ignore)'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="选择多个">选择多个</h3><p>jquery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'DIV, A, SCRIPT'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>DOM API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'DIV, A, SCRIPT'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>总结下来归纳像jQuery般的API即：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.$ = <span class="function"><span class="keyword">function</span>(<span class="params">selector</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> selectorType = <span class="string">'querySelectorAll'</span>;</span><br><span class="line">    <span class="keyword">if</span>(selector.indexOf(<span class="string">'#'</span>)===<span class="number">0</span>)&#123;</span><br><span class="line">        selectorType = <span class="string">'getElementById'</span>;</span><br><span class="line">        selector = selector.substring(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">document</span>[selectorType](selector);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Dom操作">Dom操作</h2><h3 id="创建元素">创建元素</h3><p>jquery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'&lt;div class="test"&gt;'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>DOM API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line">    <span class="comment">//div.className = 'test';</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="插入元素">插入元素</h3><p>jquery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#1'</span>).before(<span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>) <span class="comment">//1.1 #1&#123;&#125; </span></span><br><span class="line">$(<span class="string">'#1'</span>).prepend(<span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>)<span class="comment">//#1&#123;1.1  &#125;</span></span><br><span class="line">$(<span class="string">'#1'</span>).append(<span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>) <span class="comment">//#1&#123;  1.1&#125;</span></span><br><span class="line">$(<span class="string">'#1'</span>).after(<span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>)  <span class="comment">//#1&#123;     &#125; 1.1</span></span><br></pre></td></tr></table></figure></p>
+<p>DOM API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'1'</span>).insertAdjacentHTML(<span class="string">'beforebegin'</span>, <span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'1'</span>).insertAdjacentHTML(<span class="string">'afterbegin'</span>, <span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'1'</span>).insertAdjacentHTML(<span class="string">'beforeend'</span>, <span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'1'</span>).insertAdjacentHTML(<span class="string">'afterend'</span>, <span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="移动元素">移动元素</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'1'</span>).appendChild(<span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>);</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'1'</span>).insertBefore(<span class="built_in">document</span>.getElementById(<span class="string">'1.2'</span>),<span class="string">'&lt;div id="1.1"&gt;&lt;/div&gt;'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="删除元素">删除元素</h3><p>jQuery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'1'</span>).remove();</span><br></pre></td></tr></table></figure></p>
+<p>DOM API<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'foobar'</span>).parentNode</span><br><span class="line">    .removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'foobar'</span>));</span><br></pre></td></tr></table></figure></p>
+<h3 id="操作样式">操作样式</h3><h3 id="操作属性">操作属性</h3><h3 id="操作内容">操作内容</h3><h2 id="Ajax请求">Ajax请求</h2><h2 id="事件">事件</h2><h2 id="工具方法">工具方法</h2><h3 id="判断类型-isArray-Object-Function">判断类型 isArray Object Function</h3><p>jQuery<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.isArray(arr)</span><br><span class="line">$.isPlainObject(obj)</span><br><span class="line">$.isFunction(fn)</span><br></pre></td></tr></table></figure></p>
+<p>Javascript</p>
+<ul>
+<li><p>isArray<br>仅现代浏览器 <code>Array.isArray(arr);</code><br>所有浏览器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">arr</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(arr) === <span class="string">'[object Array]'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>isObject</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !!obj &amp;&amp; <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">'[object Object]'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>isFunction<br><code>typeof fn === &#39;function&#39;</code></p>
+</li>
+<li><p>判断所有对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">classof</span>(<span class="params">type</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(type === <span class="keyword">void</span> <span class="number">0</span>) <span class="keyword">return</span> <span class="string">'Undefined'</span>;</span><br><span class="line">    <span class="keyword">if</span>(type === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">'Null'</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(type).slice(<span class="number">8</span>,<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="混合对象">混合对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">a, b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> b)&#123;</span><br><span class="line">        bival = b[i];</span><br><span class="line">        <span class="keyword">if</span>(bival &amp;&amp; <span class="built_in">Object</span>.prototype.toString.call(bival) === <span class="string">'[object Object]'</span>)&#123;</span><br><span class="line">                a[i] = a[i] || &#123;&#125;;</span><br><span class="line">                extend(a[i], bival);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                a[i] = bival;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="实现data">实现data</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// works in all browsers</span></span><br><span class="line"><span class="keyword">var</span> data = <span class="built_in">window</span>.WeakMap ? <span class="keyword">new</span> <span class="built_in">WeakMap</span>() : (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> lastId = <span class="number">0</span>,</span><br><span class="line">        store = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        set: <span class="function"><span class="keyword">function</span>(<span class="params">element, info</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> id;</span><br><span class="line">            <span class="keyword">if</span> (element.myCustomDataTag === <span class="literal">undefined</span>) &#123;</span><br><span class="line">                id = lastId++;</span><br><span class="line">                element.myCustomDataTag = id;</span><br><span class="line">            &#125;</span><br><span class="line">            store[id] = info;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        get: <span class="function"><span class="keyword">function</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> store[element.myCustomDataTag];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/18/跨域的N种方法实践/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          跨域的N种方法实践
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/31/passport-local基于connect的验证流程解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">passport-local基于connect的验证流程解析</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="You-Dont-Need-jQuery" data-title="You Dont Need jQuery" data-url="http://ccjoe.github.io/2015/08/14/You-Dont-Need-jQuery/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ccjoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Joe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/coraui.pgg.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

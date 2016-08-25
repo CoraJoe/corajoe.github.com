@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>react web的构建 | CCJoe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="构建解决浏览器端的require与UMD
+AMD: AMD以浏览器为第一（browser-first）的原则发展，选择异步加载模块。它的模块支持对象（objects）、函数（functions）、构造器（constructors）、字符串（strings）、JSON等各种类型的模块。因此在浏览器中它非常灵活。
+
+CMD: CommonJS module以服务器端为第一（server-first）的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react web的构建">
+<meta property="og:url" content="http://ccjoe.github.io/2015/09/07/react-web的构建/index.html">
+<meta property="og:site_name" content="CCJoe">
+<meta property="og:description" content="构建解决浏览器端的require与UMD
+AMD: AMD以浏览器为第一（browser-first）的原则发展，选择异步加载模块。它的模块支持对象（objects）、函数（functions）、构造器（constructors）、字符串（strings）、JSON等各种类型的模块。因此在浏览器中它非常灵活。
+
+CMD: CommonJS module以服务器端为第一（server-first）的">
+<meta property="og:updated_time" content="2016-03-30T05:13:41.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react web的构建">
+<meta name="twitter:description" content="构建解决浏览器端的require与UMD
+AMD: AMD以浏览器为第一（browser-first）的原则发展，选择异步加载模块。它的模块支持对象（objects）、函数（functions）、构造器（constructors）、字符串（strings）、JSON等各种类型的模块。因此在浏览器中它非常灵活。
+
+CMD: CommonJS module以服务器端为第一（server-first）的">
+  
+    <link rel="alternative" href="/atom.xml" title="CCJoe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ccjoe.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Joe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">那时候，车，马，朝阳...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/cao">每日糙点</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/build/" style="font-size: 12.5px;">build</a> <a href="/tags/co/" style="font-size: 10px;">co</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross-domain</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/flux/" style="font-size: 10px;">flux</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/gulp/" style="font-size: 12.5px;">gulp</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mvc/" style="font-size: 20px;">mvc</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/passport/" style="font-size: 10px;">passport</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/regExp/" style="font-size: 10px;">regExp</a> <a href="/tags/rest/" style="font-size: 12.5px;">rest</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/thunk/" style="font-size: 10px;">thunk</a> <a href="/tags/webapp/" style="font-size: 15px;">webapp</a> <a href="/tags/web优化/" style="font-size: 10px;">web优化</a> <a href="/tags/便笺/" style="font-size: 10px;">便笺</a> <a href="/tags/影评/" style="font-size: 10px;">影评</a> <a href="/tags/性能分析/" style="font-size: 10px;">性能分析</a> <a href="/tags/投资/" style="font-size: 10px;">投资</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/组件化/" style="font-size: 12.5px;">组件化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://developer.mozilla.org/zh-CN/">MDN</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.github.com/">Github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">理无常是，事无常非。 里面很多文章都是半完成式或在完善相关主题，仅作为作者整理思路， 读者见谅。</div>
+				</section>
+				
+			</div>
+
+		</div>
+			<div style="position:absolute; top:550px; width:100%; font-size:12px; line-height:22px;">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><a>所有皆原创</a> <br> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+			</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Joe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Joe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">那时候，车，马，朝阳...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/cao">每日糙点</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-react-web的构建" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/07/react-web的构建/" class="article-date">
+  	<time datetime="2015-09-07T09:15:31.000Z" itemprop="datePublished">2015-09-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      react web的构建
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/build/">build</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="构建解决浏览器端的require与UMD">构建解决浏览器端的<code>require</code>与<code>UMD</code></h2><ul>
+<li><p><code>AMD:</code> AMD以浏览器为第一<code>（browser-first）</code>的原则发展，选择异步加载模块。它的模块支持对象（objects）、函数（functions）、构造器（constructors）、字符串（strings）、JSON等各种类型的模块。因此在浏览器中它非常灵活。</p>
+</li>
+<li><p><code>CMD:</code> CommonJS module以服务器端为第一<code>（server-first）</code>的原则发展，选择同步加载模块。它的模块是无需包装的（unwrapped modules）且贴近于ES.next/Harmony的模块格式。但它仅支持对象类型（objects）模块。</p>
+</li>
+<li><p><strong><code>UMD:</code></strong> 这迫使一些人又想出另一个更通用格式 <code>UMD(Universal Module Definition)</code>。希望提供一个前后端跨平台的解决方案。<br>UMD的实现很简单，先判断是否支持NodeJS模块格式（exports是否存在），存在则使用NodeJS模块格式。<br>再判断是否支持AMD（define是否存在），存在则使用AMD方式加载模块。前两个都不存在，则将模块公开的全局（window或global）。</p>
+</li>
+</ul>
+<a id="more"></a>
+<p>在reactjs的项目里一般会用CMD的Nodejs require去管理依赖与模块， <a href="http://browserify.org/" target="_blank" rel="external">browserify</a>则可以解决require在浏览器端的实现。详细API则见<a href="https://github.com/substack/browserify-handbook" target="_blank" rel="external">browserify-handbook</a>;</p>
+<p>当一个 browserify 项目开始变大的时候，编译打包的时间也变得越来越长。这时候需要用到<code>watchify</code>来配合持续监视文件的改动，并且只重新打包必要的文件。用这种方法，第一次打包的时候可能会稍长些，但是后续的编译打包工作将一直保持在非常快的水平，这也是一个很大的进步。</p>
+<p>watchify 并没有一个相应的 gulp 插件，并且也不需要有：你可以使用 vinyl-source-stream 来把你的用于打包的 stream 连接到 gulp 管道中。</p>
+<p>下面是结合个人的示例项目<a href="https://github.com/ccjoe/jcreact" target="_blank" rel="external">jcreact</a>抽象出来的一个方法以构建react项目的browserify化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构建对UMD的支持一般会用到</span></span><br><span class="line"><span class="comment">//处理browserify和react相关</span></span><br><span class="line"><span class="keyword">var</span> browserify = <span class="built_in">require</span>(<span class="string">'browserify'</span>);</span><br><span class="line"><span class="keyword">var</span> watchify = <span class="built_in">require</span>(<span class="string">'watchify'</span>);</span><br><span class="line"><span class="keyword">var</span> source = <span class="built_in">require</span>(<span class="string">'vinyl-source-stream'</span>);</span><br><span class="line"><span class="keyword">var</span> buffer = <span class="built_in">require</span>(<span class="string">'vinyl-buffer'</span>);</span><br><span class="line"><span class="keyword">var</span> rename = <span class="built_in">require</span>(<span class="string">'gulp-rename'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">browserifyIt</span>(<span class="params">opts</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bundler = browserify(&#123;</span><br><span class="line">        transform:[</span><br><span class="line">          [<span class="string">"reactify"</span>]  <span class="comment">//, &#123;"es6": true&#125;</span></span><br><span class="line">        ],</span><br><span class="line">        entries: [opts.entries],</span><br><span class="line">        debug: <span class="literal">true</span>,</span><br><span class="line">        <span class="comment">// insertGlobals: true,</span></span><br><span class="line">        cache: &#123;&#125;,</span><br><span class="line">        packageCache: &#123;&#125;,</span><br><span class="line">        fullPaths: <span class="literal">true</span>,</span><br><span class="line">        standalone: opts.globalVar?opts.globalVar:<span class="literal">null</span></span><br><span class="line">        <span class="comment">//是否产生一个独立的全局变量，是的话这样的文件就不需要被require了</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//external，查找依赖时排队指定的依赖项</span></span><br><span class="line">    bundler.external(opts.development ? dependencies : [])</span><br><span class="line">           .plugin(<span class="string">'browserify-derequire'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> rebundle = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> bundler.bundle()</span><br><span class="line">        <span class="comment">// log errors if they happen</span></span><br><span class="line">        <span class="comment">// .on('error', $.util.log.bind($.util, 'Browserify Error'))</span></span><br><span class="line">        .pipe(source(opts.entriesDestName))</span><br><span class="line">        .pipe(buffer())</span><br><span class="line">        .pipe(gulp.dest(opts.dest))</span><br><span class="line">        <span class="comment">// .pipe(!opts.development ? uglify() : null)</span></span><br><span class="line">        <span class="comment">// .pipe(!opts.development ? rename(&#123;suffix: '.min'&#125;) : null)</span></span><br><span class="line">        <span class="comment">// .pipe(gulp.dest(opts.dest))</span></span><br><span class="line">        .on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            Browsersync.reload();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (opts.development) &#123;</span><br><span class="line">        bundler = watchify(bundler);</span><br><span class="line">        bundler.on(<span class="string">'update'</span>, rebundle);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    rebundle();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//调用以上方法</span></span><br><span class="line">gulp.task(<span class="string">'dev:script.example'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    browserifyIt(&#123;</span><br><span class="line">        entries: [<span class="string">'./example/js/App.js'</span>], <span class="comment">//源</span></span><br><span class="line">        development: <span class="literal">true</span>,                <span class="comment">//开发版</span></span><br><span class="line">        entriesDestName: <span class="string">'app.js'</span>,        <span class="comment">//源输出的名字</span></span><br><span class="line">        dest: <span class="string">'./example/build/'</span>          <span class="comment">//源输出的目录</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="构建解决对JSX语法的支持">构建解决对JSX语法的支持</h2><p>在开发环境可以引入JSXTransformer.js在浏览器端解析对JSX语法支持，而在生产环境一般使用react tools编译打包后使用。</p>
+<h2 id="构建解决对ES6的编译及reactify化">构建解决对ES6的编译及reactify化</h2><p>browserify 的配置transform可以解决reactify及es6相关问题，当然github上还有许多这样的transform</p>
+<blockquote>
+<p>transform:[<br>  [“reactify”]  //, {“es6”: true}<br>]</p>
+</blockquote>
+<h2 id="构建后对于构建文件的引用。">构建后对于构建文件的引用。</h2><p>  比如项目依赖<code>react</code>和一个react组件库<code>jcreact</code>, 构建分二种情况：</p>
+<ul>
+<li>对于require的依赖会递归查询，将所有依赖打包。<br>对这种构建，引入依赖毫无疑问是</li>
+</ul>
+<blockquote>
+<p>var React =  require(“react”);<br>  var JcReact =  require(“jcreact”);</p>
+</blockquote>
+<ul>
+<li>对于使用<code>browserify</code>的<code>external</code>配置来构建打包的文件会排除指定的依赖，如react组件库jcreact依赖react，打包时单独打包jcreact则需要排除react,此时需要指定打包后组件库jcreact全局变量的值即通过 standalone选项的配置来指定。引入使用全局变量，如<code>React</code>、<code>JcReact</code></li>
+</ul>
+<p>对于第2种无疑更适合于项目，因为所有依赖打包将会形成一个很大的文件，对于web加载来讲时间可能过长。</p>
+<hr>
+
+<p><strong>示例见：<a href="https://github.com/ccjoe/jcreact" target="_blank" rel="external">jcreact</a></strong><br><strong>参考：<br><a href="http://christianalfoni.github.io/javascript/2014/08/15/react-js-workflow.html" target="_blank" rel="external">React JS and a browserify workflow
+</a><br><a href="http://www.gulpjs.com.cn/docs/recipes/fast-browserify-builds-with-watchify/" target="_blank" rel="external">使用 watchify 加速 browserify 编译</a></strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/08/Web前端架构路径/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Web前端架构路径
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/03/便笺式总结mac上遇到的一些日常命令/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">便笺式总结mac上遇到的一些日常命令</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="react-web的构建" data-title="react web的构建" data-url="http://ccjoe.github.io/2015/09/07/react-web的构建/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ccjoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Joe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/coraui.pgg.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

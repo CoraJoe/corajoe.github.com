@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>开发nodejs的MVC webapp? 管理多web应用的环境? | CCJoe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个Nodejs MVC jcmvc的使用示例框架，jcmvc可以用来开发基于Nodejs的MVC模式的Web应用 或者 作为前端的前端模块化组织的web服务器
+引入依赖jcmvc:  npm install jcmvcjcmvc的npm地址：https://www.npmjs.com/package/jcmvcjcmvc的example的使用实例: jc-mvc
+使用方法：
+下载代码： 假设到如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="开发nodejs的MVC webapp? 管理多web应用的环境?">
+<meta property="og:url" content="http://ccjoe.github.io/2015/09/13/开发nodejs的MVC-webapp-管理多web应用的环境/index.html">
+<meta property="og:site_name" content="CCJoe">
+<meta property="og:description" content="一个Nodejs MVC jcmvc的使用示例框架，jcmvc可以用来开发基于Nodejs的MVC模式的Web应用 或者 作为前端的前端模块化组织的web服务器
+引入依赖jcmvc:  npm install jcmvcjcmvc的npm地址：https://www.npmjs.com/package/jcmvcjcmvc的example的使用实例: jc-mvc
+使用方法：
+下载代码： 假设到如">
+<meta property="og:updated_time" content="2016-03-30T05:13:41.581Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="开发nodejs的MVC webapp? 管理多web应用的环境?">
+<meta name="twitter:description" content="一个Nodejs MVC jcmvc的使用示例框架，jcmvc可以用来开发基于Nodejs的MVC模式的Web应用 或者 作为前端的前端模块化组织的web服务器
+引入依赖jcmvc:  npm install jcmvcjcmvc的npm地址：https://www.npmjs.com/package/jcmvcjcmvc的example的使用实例: jc-mvc
+使用方法：
+下载代码： 假设到如">
+  
+    <link rel="alternative" href="/atom.xml" title="CCJoe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ccjoe.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Joe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">那时候，车，马，朝阳...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/cao">每日糙点</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/build/" style="font-size: 12.5px;">build</a> <a href="/tags/co/" style="font-size: 10px;">co</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross-domain</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/flux/" style="font-size: 10px;">flux</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/gulp/" style="font-size: 12.5px;">gulp</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mvc/" style="font-size: 20px;">mvc</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/passport/" style="font-size: 10px;">passport</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/regExp/" style="font-size: 10px;">regExp</a> <a href="/tags/rest/" style="font-size: 12.5px;">rest</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/thunk/" style="font-size: 10px;">thunk</a> <a href="/tags/webapp/" style="font-size: 15px;">webapp</a> <a href="/tags/web优化/" style="font-size: 10px;">web优化</a> <a href="/tags/便笺/" style="font-size: 10px;">便笺</a> <a href="/tags/影评/" style="font-size: 10px;">影评</a> <a href="/tags/性能分析/" style="font-size: 10px;">性能分析</a> <a href="/tags/投资/" style="font-size: 10px;">投资</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/组件化/" style="font-size: 12.5px;">组件化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://developer.mozilla.org/zh-CN/">MDN</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.github.com/">Github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">理无常是，事无常非。 里面很多文章都是半完成式或在完善相关主题，仅作为作者整理思路， 读者见谅。</div>
+				</section>
+				
+			</div>
+
+		</div>
+			<div style="position:absolute; top:550px; width:100%; font-size:12px; line-height:22px;">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><a>所有皆原创</a> <br> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+			</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Joe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Joe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">那时候，车，马，朝阳...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/cao">每日糙点</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-开发nodejs的MVC-webapp-管理多web应用的环境" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/13/开发nodejs的MVC-webapp-管理多web应用的环境/" class="article-date">
+  	<time datetime="2015-09-13T09:28:49.000Z" itemprop="datePublished">2015-09-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      开发nodejs的MVC webapp? 管理多web应用的环境?
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gulp/">gulp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mvc/">mvc</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webapp/">webapp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/组件化/">组件化</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>一个Nodejs MVC jcmvc的使用示例框架，jcmvc可以用来开发基于Nodejs的MVC模式的Web应用 或者 作为前端的前端模块化组织的web服务器</strong></p>
+<p>引入依赖<code>jcmvc</code>:  <code>npm install jcmvc</code><br>jcmvc的npm地址：<a href="https://www.npmjs.com/package/jcmvc" target="_blank" rel="external">https://www.npmjs.com/package/jcmvc</a><br>jcmvc的example的使用实例: <a href="https://github.com/ccjoe/jc-mvc" target="_blank" rel="external">jc-mvc</a></p>
+<h2 id="使用方法：">使用方法：</h2><ul>
+<li>下载代码： 假设到如下目录 /Users/shaofengliu/IT/git/jc-mvc<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:ccjoe/jc-mvc.git</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>安装依赖  <code>cd jc-mvc</code> <code>npm install</code></p>
+<p><strong>这项目主要有二大功能用途：</strong></p>
+</li>
+</ul>
+<ol>
+<li>基于Nodejs开发MVC的web应用，说明详见：<a href="https://www.npmjs.com/package/jcmvc" target="_blank" rel="external">npm build</a>或<a href="https://github.com/ccjoe/jcmvc" target="_blank" rel="external">jcmvc Git</a></li>
+<li>适合于前端开发的一个环境：作为前端模块化组织的web服务器,特点是可以多支持任意目录的多web应用服务。  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line">.</span><br><span class="line">├── README<span class="selector-class">.md</span>   </span><br><span class="line">├── app             <span class="comment">//业务逻辑代码，规范是按业务逻辑划分的model与ctrl, </span></span><br><span class="line">├── static          <span class="comment">//前端静态代码，也是提供多web服务时的`主应用`的前端目录。</span></span><br><span class="line">├── web_generator   <span class="comment">//创建新的web应用时根据这里的模板生成web应用的配置与入口。</span></span><br><span class="line">├── webs            <span class="comment">//创建新的web应用生成的多web的入口与配置文件，即除`主应用`之外的其它web应用都在此目录</span></span><br><span class="line">├── app<span class="selector-class">.js</span>          <span class="comment">//`主应用`入口文件</span></span><br><span class="line">├── config<span class="selector-class">.js</span>       <span class="comment">//`主应用`配置文件，注意其它应用的入口与配置文件在webs里</span></span><br><span class="line">├── bower<span class="selector-class">.json</span>      <span class="comment">//`主应用`前端依赖</span></span><br><span class="line">├── package<span class="selector-class">.json</span>    <span class="comment">//`主应用`服务依赖与构建依赖</span></span><br><span class="line">├── gulpfile<span class="selector-class">.js</span>     <span class="comment">// 多应用构建中心，可由此启动多应用 `gulp webName`即会启动相应的webapp</span></span><br><span class="line">├── gulpfile<span class="selector-class">.backup</span></span><br><span class="line">├── bower_components<span class="comment">// 前端依赖包</span></span><br><span class="line">└── node_modules    <span class="comment">// 服务依赖与构建依赖赖包</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="配置多Web服务">配置多Web服务</h2><p>如果本机仅管理一个web应用，当然不需要创建新的web服务，在主应用(jc-mvc)里app和static目录即可管理与开发，如果又需要一个新的web服务，难道再复制一个jc-mvc吗，No! 不需要，仅需要在webs目录里新建复制相应的配置文件和主文件，如果这太麻烦，这里提供命令交互实现，你需要:  </p>
+<ol>
+<li><p><code>gulp create</code> 命令行交互会提示输入，然后创建一个web服务，如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">? 请输入webApp的名称: youWebName</span><br><span class="line">? 请输入app的域名: 127.0.0.1</span><br><span class="line">? 请输入端口: 3300</span><br><span class="line">? 请输入webApp的前端路径: /Users/shaofengliu/IT/git/webcenter/youWebName/</span><br><span class="line">恭喜，已创建完毕，可运行 gulp youWebName运行！</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这样就会生成一个新的web环境，依此可以新建多个web服务。<br>注意，请输入webApp的前端路径可以为任意指定的目录（可以在jc-mvc目录之内或外）。</p>
+</li>
+<li><p><code>gulp update</code>, 新建一个web app挂载到jc-mvc下后，要使用<code>gulp update</code>更新注册gulp task任务，以便下一步启动。 </p>
+</li>
+<li><p><code>gulp youWebName</code> 最后 gulp youWebName，即可启动相应的web，可同时多开。</p>
+</li>
+</ol>
+<h2 id="有什么好处">有什么好处?</h2><ol>
+<li>一台机器仅需要一个宿主环境即可管理多web，即jc-mvc<br> 这有点类似 apache或iis配置多网站，但这里不仅如此还提供了额外的功能</li>
+<li>所有的web应用拥有最简单的自然映射的MVC</li>
+<li>打包了doT这个模板引擎去模块化页面</li>
+<li>打包了nodemon与livereload的监控机制，所有应用可实现自动重启与页面刷新</li>
+</ol>
+<p>作为适合于前端开发的一个环境，一般多web（除主web外）不需要处理ctrl与model（如果需要的话，可以在youWebName里新建<a href="https://www.npmjs.com/package/jcmvc" target="_blank" rel="external">app目录同样可以实现由nodejs渲染带数据的页面</a>）,前端目录结构如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前端目录，可以实现任意多个任意路径的web挂载在jc-mvc下实现多web服务</span></span><br><span class="line"><span class="comment">// /Users/shaofengliu/IT/git/webcenter/youWebName/</span></span><br><span class="line">.</span><br><span class="line">├── app         <span class="comment">//仅作为前端环境不需要，但是也可以在里面按业务逻辑去写model与ctrl,由ctrl返回数据结构给页面。</span></span><br><span class="line">├── dist        <span class="comment">//构建后的dist目录</span></span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── fonts</span><br><span class="line">│   └── js</span><br><span class="line">├── src         <span class="comment">//前端静态资源目录</span></span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── favicon<span class="selector-class">.ico</span></span><br><span class="line">│   ├── <span class="selector-tag">img</span></span><br><span class="line">│   ├── js</span><br><span class="line">│   └── sass          </span><br><span class="line">└── views       <span class="comment">//前端模板目录，决定路由</span></span><br><span class="line">    ├── auth</span><br><span class="line">    │   └── login<span class="selector-class">.html</span></span><br><span class="line">    ├── index</span><br><span class="line">    │   └── index<span class="selector-class">.html</span></span><br><span class="line">    ├── module</span><br><span class="line">    │   └── test<span class="selector-class">.html</span></span><br><span class="line">    ├── public</span><br><span class="line">    │   ├── error<span class="selector-class">.html</span></span><br><span class="line">    │   ├── <span class="selector-tag">footer</span><span class="selector-class">.html</span></span><br><span class="line">    │   └── <span class="selector-tag">header</span><span class="selector-class">.html</span></span><br><span class="line">    └── user</span><br><span class="line">        ├── add<span class="selector-class">.html</span></span><br><span class="line">        ├── edit<span class="selector-class">.html</span></span><br><span class="line">        ├── index<span class="selector-class">.html</span></span><br><span class="line">        ├── layout<span class="selector-class">.html</span></span><br><span class="line">        ├── list<span class="selector-class">.html</span></span><br><span class="line">        ├── partial</span><br><span class="line">        └── view.html</span><br></pre></td></tr></table></figure></p>
+<p>根据views生成的路由规则，及之前命令行交互的配置，那么访问views里的user的list即是<br><code>127.0.0.1:3300/user/list</code>，<br>而且这些模板文件很方便的模块化及相互引用（可查看示例代码），再也不需要多次复制相同的结构与代码。对于重构与页面开发的是一个很好的环境，对于交付给下游也是高质量的输出，因为不管是前端渲染页面还是后端，实现后都应该是类似这样的结构。</p>
+<h2 id="更新日志">更新日志:</h2><ul>
+<li>2015-07-26 引入connect模块, 方便使用中间件。</li>
+<li>2015-08-03 加入passport与passport-local模块，用户登录认证。</li>
+<li>2015-08-04 更新日志 引入Restful模块，在config里配置restRuiPrefix: ‘/api’,则此路由下服从restful规则。</li>
+<li>2015-08-05 基本完成rest模块。rest的model可以共用mvc的model，也可以在model里定义个rest对象方法集合，在ctrl里对应的也是exports.rest = {},规则与MVC一样，ctrl仅需要返回组织好的数据，如果是promise则需要返回带组织好的数据的promise便可以自动返回json</li>
+<li>2015-09-11<br>  将jcmvc npm化<br>  提供多web服务，可以指定到任意目录（详见以上）  </li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/17/设计模式重读/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          设计模式重读
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/08/Web前端架构路径/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Web前端架构路径</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="开发nodejs的MVC-webapp-管理多web应用的环境" data-title="开发nodejs的MVC webapp? 管理多web应用的环境?" data-url="http://ccjoe.github.io/2015/09/13/开发nodejs的MVC-webapp-管理多web应用的环境/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ccjoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Joe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/coraui.pgg.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

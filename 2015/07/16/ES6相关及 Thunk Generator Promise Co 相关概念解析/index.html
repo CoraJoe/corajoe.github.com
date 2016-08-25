@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ES6相关及 Thunk Generator Promise Co 相关概念解析 | CCJoe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="ThunkThunk是一种临时function, 被当作参数传递进另一个function, 实现function的引用传参，而不是传值传参。其应用之一如下：把形如 fs.readFile(fileName, callback);  转化为 Thunk(fileName)(callback), 这样就避免了多重嵌套回调， 增加可读性与代码的组织性。
+实现原理：12345var Thunk = fun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6相关及 Thunk Generator Promise Co 相关概念解析">
+<meta property="og:url" content="http://ccjoe.github.io/2015/07/16/ES6相关及 Thunk Generator Promise Co 相关概念解析/index.html">
+<meta property="og:site_name" content="CCJoe">
+<meta property="og:description" content="ThunkThunk是一种临时function, 被当作参数传递进另一个function, 实现function的引用传参，而不是传值传参。其应用之一如下：把形如 fs.readFile(fileName, callback);  转化为 Thunk(fileName)(callback), 这样就避免了多重嵌套回调， 增加可读性与代码的组织性。
+实现原理：12345var Thunk = fun">
+<meta property="og:updated_time" content="2016-03-30T05:13:41.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6相关及 Thunk Generator Promise Co 相关概念解析">
+<meta name="twitter:description" content="ThunkThunk是一种临时function, 被当作参数传递进另一个function, 实现function的引用传参，而不是传值传参。其应用之一如下：把形如 fs.readFile(fileName, callback);  转化为 Thunk(fileName)(callback), 这样就避免了多重嵌套回调， 增加可读性与代码的组织性。
+实现原理：12345var Thunk = fun">
+  
+    <link rel="alternative" href="/atom.xml" title="CCJoe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ccjoe.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Joe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">那时候，车，马，朝阳...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/cao">每日糙点</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/build/" style="font-size: 12.5px;">build</a> <a href="/tags/co/" style="font-size: 10px;">co</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross-domain</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/flux/" style="font-size: 10px;">flux</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/gulp/" style="font-size: 12.5px;">gulp</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mvc/" style="font-size: 20px;">mvc</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/passport/" style="font-size: 10px;">passport</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/regExp/" style="font-size: 10px;">regExp</a> <a href="/tags/rest/" style="font-size: 12.5px;">rest</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/thunk/" style="font-size: 10px;">thunk</a> <a href="/tags/webapp/" style="font-size: 15px;">webapp</a> <a href="/tags/web优化/" style="font-size: 10px;">web优化</a> <a href="/tags/便笺/" style="font-size: 10px;">便笺</a> <a href="/tags/影评/" style="font-size: 10px;">影评</a> <a href="/tags/性能分析/" style="font-size: 10px;">性能分析</a> <a href="/tags/投资/" style="font-size: 10px;">投资</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/组件化/" style="font-size: 12.5px;">组件化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://developer.mozilla.org/zh-CN/">MDN</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.github.com/">Github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">理无常是，事无常非。 里面很多文章都是半完成式或在完善相关主题，仅作为作者整理思路， 读者见谅。</div>
+				</section>
+				
+			</div>
+
+		</div>
+			<div style="position:absolute; top:550px; width:100%; font-size:12px; line-height:22px;">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><a>所有皆原创</a> <br> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+			</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Joe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Joe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">那时候，车，马，朝阳...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/cao">每日糙点</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-ES6相关及 Thunk Generator Promise Co 相关概念解析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/16/ES6相关及 Thunk Generator Promise Co 相关概念解析/" class="article-date">
+  	<time datetime="2015-07-16T03:21:33.000Z" itemprop="datePublished">2015-07-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6相关及 Thunk Generator Promise Co 相关概念解析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/co/">co</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/generator/">generator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/thunk/">thunk</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Thunk">Thunk</h2><p>Thunk是一种临时function, 被当作参数传递进另一个function, 实现function的引用传参，而不是传值传参。<br>其应用之一如下：<br>把形如 <code>fs.readFile(fileName, callback);</code>  转化为 <code>Thunk(fileName)(callback)</code>, 这样就避免了多重嵌套回调， 增加可读性与代码的组织性。</p>
+<p>实现原理：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Thunk = <span class="function"><span class="keyword">function</span> (<span class="params">fileName</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fs.readFile(fileName, callback); </span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>根据此原理，可以将任何函数Thunk化。<br><a id="more"></a><br>把形如 <code>fs.readFile(fileName, callback);</code> 转化为形如 <code>Thunk(fs.readFile)(fileName)(callback)</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Thunk = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>)</span>&#123;   <span class="comment">//fs.readFile</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);   <span class="comment">//args [filePathName]</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>)</span>&#123;</span><br><span class="line">      args.push(callback);                              <span class="comment">//args [filePathName, callback]</span></span><br><span class="line">      <span class="keyword">return</span> fn.apply(<span class="keyword">this</span>, args);                      <span class="comment">//this [node执行环境 ?]</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Thunk(fs.readFile)(filePathName)(callback);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Generator">Generator</h2><h3 id="Generator-详解">Generator 详解</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Generator function标识 function*</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'hello'</span>;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'world'</span>;</span><br><span class="line">   <span class="keyword">return</span> <span class="string">'the end'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> g = gen();</span><br></pre></td></tr></table></figure>
+<p>该函数有二种(<code>yield, return</code>)共三个状态：hello，world和 the end, 用g.next()调用执行并且移动内部指针状态，每调用一次执行一种状态，每次返回一个对象(如下)，当执行到return时，状态done为true;<br>如果该函数没有return语句，则返回的对象的value属性值为undefined</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    value: val,</span><br><span class="line">    done: true/false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行时状态<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g.next()</span><br><span class="line"><span class="built_in">Object</span> &#123;value: <span class="string">"hello"</span>, done: <span class="literal">false</span>&#125;</span><br><span class="line">g.next()</span><br><span class="line"><span class="built_in">Object</span> &#123;value: <span class="string">"world"</span>, done: <span class="literal">false</span>&#125;</span><br><span class="line">g.next()</span><br><span class="line"><span class="built_in">Object</span> &#123;value: <span class="string">"the end"</span>, done: <span class="literal">true</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>注意： 当next传参数时，会将传的参数当作上一次yield时的返回值, 如下代码可以执行感受下。</em></strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="number">2</span> * (<span class="keyword">yield</span> (x + <span class="number">1</span>));</span><br><span class="line">  <span class="built_in">console</span>.log(x, y, <span class="string">'xy'</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> z = <span class="keyword">yield</span> (y / <span class="number">3</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(x, y, z, <span class="string">'xyz'</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> (x + y + z);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> g = gen(<span class="number">5</span>);</span><br><span class="line">g.next();</span><br><span class="line"><span class="built_in">Object</span> &#123;value: <span class="number">6</span>, done: <span class="literal">false</span>&#125;</span><br><span class="line">g.next(<span class="number">10</span>);</span><br><span class="line"><span class="comment">//VM1666:4 5 20 "xy"</span></span><br><span class="line"><span class="built_in">Object</span> &#123;value: <span class="number">6.666666666666667</span>, done: <span class="literal">false</span>&#125;</span><br><span class="line">g.next(<span class="number">20</span>);</span><br><span class="line"><span class="comment">//VM1666:7 5 20 20 "xyz"</span></span><br><span class="line"><span class="built_in">Object</span> &#123;value: <span class="number">45</span>, done: <span class="literal">true</span>&#125;</span><br><span class="line"><span class="comment">//或使用for ..of语句遍历每一个状态,此时不需要使用next()方法</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> v <span class="keyword">of</span> gen()) &#123; </span><br><span class="line">  <span class="built_in">console</span>.log(v);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Generator-yield语句解析">Generator yield语句解析</h3><p>yield*语句: <a href="http://es6.ruanyifeng.com/#docs/generator" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/generator</a></p>
+<h3 id="Generator-应用">Generator 应用</h3><h4 id="Generator与状态机">Generator与状态机</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//状态机</span></span><br><span class="line"><span class="keyword">var</span> clock = <span class="function"><span class="keyword">function</span>*(<span class="params">_</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;    <span class="comment">//while的作用是产生无穷多组合yield，不会done为true</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'状态1'</span>);</span><br><span class="line">    <span class="keyword">yield</span> _;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'状态2'</span>);</span><br><span class="line">    <span class="keyword">yield</span> _;    </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Generator与异步">Generator与异步</h4><h4 id="Generator与Promise">Generator与Promise</h4><h2 id="Co-及-Co与Generator的应用">Co 及 Co与Generator的应用</h2><p>Co function 目的是将形如 fs.readFile(filePath, callback) 的异步方法<br>转化为形如下面的方法去使用，个人觉得在此种情形下作用与thunk方法类似(但在其它地方还要很多应用)：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.将异步方法重写为如下形（readFile -&gt; readFileCo）</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readFileCo</span>(<span class="params">filePath</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;    <span class="comment">//这个必须返回这个function且参数为callback</span></span><br><span class="line">     fs.readFile(filePath, callback);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.使用Co 及 Generator 执行重写后的方法</span></span><br><span class="line">co(<span class="function"><span class="keyword">function</span>* (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> readFileCo(filePath)</span><br><span class="line">  <span class="comment">//yield readFileCoFn(filePath);</span></span><br><span class="line">&#125;)(callback);  <span class="comment">//readfile的callback为 function(error, data)&#123;&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>结合上面的示例,分析Co的执行原理及Co基本结构如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//GenFunc 需要传入一个 function*</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">co</span>(<span class="params">GenFunc</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//执行co方法后返回一个方法去执行</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">cb</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//执行generator function</span></span><br><span class="line">    <span class="keyword">var</span> gen = GenFunc()</span><br><span class="line">    next();</span><br><span class="line">    <span class="comment">//next执行（1 times）</span></span><br><span class="line">    <span class="comment">//next参数为callback的(err, data)</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">err, args</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        cb(err);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">//如果有generator next方法</span></span><br><span class="line">        <span class="keyword">if</span> (gen.next) &#123;</span><br><span class="line">          <span class="comment">//传参执行generator next，会按序触发yield语句</span></span><br><span class="line">          <span class="keyword">var</span> ret = gen.next(args)</span><br><span class="line">          <span class="comment">//如果generator执行状态done为true,则执行回调cb</span></span><br><span class="line">          <span class="keyword">if</span> (ret.done) &#123;</span><br><span class="line">            cb &amp;&amp; cb(<span class="literal">null</span>, args)</span><br><span class="line">          &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="comment">//如果generator执行状态done不为true</span></span><br><span class="line">          <span class="comment">//ret.value是generator执行时yield的返回值, yield返回的是readFileCo(filePath) =&gt; 返回的是function(callback), 所以ret.value就是这个function</span></span><br><span class="line">          <span class="comment">//而参数next 即为此方法体</span></span><br><span class="line">          <span class="comment">//综合来理解，即如果没有done完的话，执行function(callback)，此时callback为 next(err, args);</span></span><br><span class="line">            ret.value(next)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="ES6-Promise">ES6 Promise</h2><h3 id="promise-定义">promise 定义</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Promise 接口表示为一个值的代理，这个值在promise创建时未必已知</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>)</span>&#123;</span><br><span class="line">  <span class="comment">//resolve 完成当前promise</span></span><br><span class="line">  <span class="comment">//reject  拒绝当前promise</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="promise属性">promise属性</h3><p>Promise.length</p>
+<h3 id="promise方法">promise方法</h3><p>Promise.all()<br>Promise.race()<br>Promise.reject()<br>Promise.resolve()</p>
+<h3 id="promise原型">promise原型</h3><p>Promise.prototype.catch()<br>Promise.prototype.then()</p>
+<h2 id="Generator-Co-Promise相结合">Generator,Co,Promise相结合</h2><p>总体来看 Co是为了改造Generator方便去使用，而嵌入Promise则为了更好的去控制异步及相关流程控制。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/17/Angular-js-IN-SPA-数据流/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Angular.js IN SPA 数据流
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/09/构建基于MVC架构的NodeJs应用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">构建基于MVC架构的NodeJs应用</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ES6相关及 Thunk Generator Promise Co 相关概念解析" data-title="ES6相关及 Thunk Generator Promise Co 相关概念解析" data-url="http://ccjoe.github.io/2015/07/16/ES6相关及 Thunk Generator Promise Co 相关概念解析/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ccjoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Joe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/coraui.pgg.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

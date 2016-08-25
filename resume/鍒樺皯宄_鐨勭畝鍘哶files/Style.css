@@ -1,0 +1,473 @@
+
+body
+{
+    border: 0;
+    background: #eee;
+    padding: 0;
+    font: 12px 宋体;
+    color: #333;
+    margin: 0px;
+}
+img{border:0;}
+.top
+{
+    background-image: url('images/navigation_head_02.gif');
+    height: 39px;
+}
+
+.DIVsrcoll11
+{
+    border-right: #ffffff 1px solid;
+    border-bottom: #ffffff 1px solid;
+    border-left: 1px solid #A5BBD1;
+    border-top: #A5BBD1 1px solid;
+    overflow-y: scroll;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+hr
+{
+    color: #dddddd;
+    width: 100%;
+}
+.cjol31
+{
+    background-color: #CBDCED;
+    border-top: #CBDCED;
+    border-left: 1px solid #ffffff;
+    border-bottom: 1px solid #708FAF;
+    border-right: 1px solid #708FAF;
+    text-align: center;
+    vertical-align: top;
+    width: 100%;
+}
+#PendingMessage
+{
+    border: 1px ridge;
+    z-index: 3px;
+    left: 220px;
+    display: none;
+    width: 250px;
+    position: absolute;
+    top: 190px;
+    height: 80px;
+    background-color: #eeeeee;
+}
+/*
+input
+{
+    font: 12px 宋体;
+    color: #333333;
+    background-color: White;
+}
+*/
+select
+{
+    padding: 0px;
+    background: #ffffff;
+    margin: 0px;
+    width: 200px;
+    line-height: normal;
+}
+option
+{
+    padding: 0px;
+    margin: 0px;
+    font: 12px 宋体;
+}
+textarea
+{
+    border-right: #CBD8E4 1px solid;
+    border-bottom: #CBD8E4 1px solid;
+    border-left: 1px solid #A5BBD1;
+    border-top: #A5BBD1 1px solid;
+    padding: 1px;
+    background: #ffffff;
+    margin: 0px;
+    width: 200px;
+    color: #333333;
+    padding-top: 0px;
+    font: 12px 宋体;
+}
+.formtextfield
+{
+    font: 11px tahoma;
+}
+
+.MyAccountInfo
+{
+    z-index: 110;
+    background: white;
+    width: 580px;
+    position: relative;
+}
+.Train
+{
+    z-index: 110;
+    background: white;
+    width: 337px;
+    position: relative;
+}
+.MyAccountInfo table
+{
+    color: black;
+}
+.MainTable
+{
+    width: 780px;
+}
+.Space
+{
+    width: 10px;
+}
+.CjolHome
+{
+    position: absolute;
+    top: 27px;
+}
+#toolbar
+{
+    font: 12px 宋体;
+    color: #EAF0F7;
+}
+.Ltable td
+{
+    border-bottom: 1px solid #eeeeee;
+}
+
+.blackb8
+{
+    font: bold 11px;
+}
+
+.black8
+{
+    font: normal 11px;
+}
+
+.Header
+{
+    font: bold 11px;
+    color: black;
+    font-size: 12px;
+}
+.btn
+{
+    font: 12px 宋体;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    cursor: hand;
+    background-color: #739DBF;
+    height: 21px;
+    padding-left: 0px 5px 0px 5px;
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    border-bottom: 1px solid #4B6F89;
+    border-right: 1px solid #4B6F89;
+}
+.btn_toolbar
+{
+    background-color: buttonface;
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    border-bottom: 1px solid buttonshadow;
+    border-right: 1px solid buttonshadow;
+    height: 21px;
+}
+
+.SectionHeader
+{
+    font: 12px 宋体;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    border: 2px solid #FF9A00;
+}
+
+Fieldset
+{
+    font: 12px 宋体;
+    color: #000000;
+    border: 1px solid #AEBCC8;
+    margin-left: 0px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
+    z-index: 90px;
+}
+.menuBottom
+{
+    top: 16px;
+    height: 1px;
+    width: 100%;
+    background: buttonshadow;
+    overflow: hidden;
+}
+.tablelistbg
+{
+    background-color: #D4D0C8;
+}
+.tabletdlist
+{
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    border-right: 1px solid buttonshadow;
+    border-bottom: 1px solid buttonshadow;
+    font: 12px 宋体;
+    cursor: default;
+    padding-left: 2px;
+    padding-top: 3px;
+}
+legend
+{
+    font: 12px 宋体;
+}
+tr.sort
+{
+    background: window;
+}
+td.sort
+{
+    color: windowtext;
+    font: menu;
+    padding: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+table.sort
+{
+    border-top: 0px solid buttonshadow;
+    border-left: 0px solid buttonshadow;
+    border-right: 1px solid buttonhighlight;
+    border-bottom: 0px solid buttonhighlight;
+    margin: 0px;
+}
+thead td
+{
+    background: buttonface;
+    font: menu;
+    border: 1px outset white;
+    cursor: default;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    border-right: 1px solid buttonshadow;
+    border-bottom: 1px solid buttonshadow;
+    height: 16px;
+}
+thead .arrow
+{
+    font: 12px 宋体;
+    color: black;
+    height: 11px;
+    width: 10px;
+    overflow: hidden;
+    margin-bottom: 2;
+    margin-top: -3;
+    padding: 0;
+    padding-top: 0;
+    padding-bottom: 2;
+}
+.gopagebutton
+{
+    font: 11px arial;
+    color: #2B4960;
+    height: 19px;
+    width: 30px;
+    padding: 0px;
+    background: #B0C9DB;
+    border-right: #709DBE 1px solid;
+    border-bottom: #709DBE 1px solid;
+    border-left: 1px solid #E0EAF1;
+    border-top: #E0EAF1 1px solid;
+}
+.tbdata
+{
+    table-layout: fixed;
+    font: 12px 宋体;
+    border-right: #cccccc 1px solid;
+    border-bottom: #cccccc 1px solid;
+    padding: 3px;
+}
+td.sort
+{
+    border-top: 1px solid buttonhighlight;
+    border-left: 1px solid buttonhighlight;
+    border-right: 1px solid buttonshadow;
+    border-bottom: 1px solid buttonshadow;
+    margin: 0px;
+    font: 12px 宋体;
+}
+div.inset
+{
+    background-color: white;
+    border-right: #D9DEE6 1px solid;
+    border-bottom: #D9DEE6 1px solid;
+    border-left: 1px solid #8E9DB5;
+    border-top: 1px solid #8E9DB5;
+}
+form
+{
+    margin: 0;
+    padding: 0;
+}
+
+div.margn
+{
+    margin: 10px;
+}
+.divcolhead_2
+{
+    height: 20px;
+}
+table
+{
+    font-family: 宋体;
+    font-size: 12px;
+}
+table a
+{
+    text-decoration: none;
+    color: black;
+}
+.Header a
+{
+    text-decoration: none;
+    color: black;
+}
+textarea
+{
+    font: normal 12px 宋体;
+    background: #FFFFFF;
+    color: #333333;
+    border: solid 1px #999999;
+    margin: 0px;
+    padding: 0px;
+}
+input.text
+{
+    font: normal 12px 宋体;
+    background: #FFFFFF;
+    color: #333333;
+    padding: 1px;
+}
+
+.multiselect
+{
+    font: normal 12px 宋体;
+    background: #FFFFFF;
+    color: #333333;
+    margin: 0px;
+    padding: 0px;
+}
+.smallselect
+{
+    font: normal 12px 宋体;
+    background: #FFFFFF;
+    color: #333333;
+    width: 50px;
+    margin: 0px;
+    padding: 0px;
+}
+.emptydiv
+{
+    height: 20px;
+    width: 99%;
+}
+.btnmove
+{
+    cursor: hand;
+    width: 18px;
+    height: 18px;
+}
+.btnclear
+{
+    border-right: #4B6F89 1px solid;
+    border-top: buttonhighlight 1px solid;
+    font: 12px 宋体;
+    border-left: buttonhighlight 1px solid;
+    cursor: hand;
+    color: #ffffff;
+    line-height: normal;
+    border-bottom: #4B6F89 1px solid;
+    background-color: #739DBF;
+    text-align: center;
+    font-weight: normal;
+    text-decoration: none;
+    width: 36px;
+    height: 18px;
+}
+.privacy-box
+{
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #e7e6e6;
+    padding: 10px;
+}
+.btn-privacy
+{
+    text-align: right;
+    margin: 10px 10px 0 10px;
+}
+.attach-td
+{
+    padding-left: 10px;
+    line-height: 22px;
+    font-size: 12px;
+}
+.h p
+{
+    float: left;
+    width: 35px;
+    height: 12px;
+    border-right: 1px solid #ffffff;
+    text-align: center;
+    padding-top: 4px;
+}
+
+
+.text_red
+{
+    color: #F10301;
+}
+.text_org
+{
+    color: #ff5f00;
+}
+.text_gray
+{
+    color: #999999;
+}
+.text_black
+{
+    color: #000;
+}
+.Page_Out
+{
+    padding: 0.3em 0.5em;
+}
+.Page_Now
+{
+    padding: 0.3em 0.5em;
+    color:Red;
+}
+
+.btnSave
+{
+    border-right:#011d33 1px solid;
+    border-bottom:#011d33 1px solid;
+    border-top:#0b5ea4 1px solid;
+    font: 12px 宋体;
+    border-left:#0b5ea4 1px solid;
+    cursor: hand;color:#ffffff;
+    line-height:normal;
+    background:#082e4e url(images/anniu_bg.gif);
+    text-align:center;font-weight:normal;
+    text-decoration:none;width:80px; height:25px;
+}
+

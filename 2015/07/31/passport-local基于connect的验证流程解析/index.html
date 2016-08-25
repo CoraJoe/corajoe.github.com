@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>passport-local基于connect的验证流程解析 | CCJoe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="概要之所以是passport-local基于connect的验证流程解析，是因为个人实例时没有用到express框架，但用到了TJ大神的node-connect。 个人的MVC框架是基于自然映射，也用到了connect去引入中间件,所以passport-local基于connect的  原理与流程在此大致梳理一下。
+passport-local代码及运转流程解析首先定义local验证的策略本地验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="passport-local基于connect的验证流程解析">
+<meta property="og:url" content="http://ccjoe.github.io/2015/07/31/passport-local基于connect的验证流程解析/index.html">
+<meta property="og:site_name" content="CCJoe">
+<meta property="og:description" content="概要之所以是passport-local基于connect的验证流程解析，是因为个人实例时没有用到express框架，但用到了TJ大神的node-connect。 个人的MVC框架是基于自然映射，也用到了connect去引入中间件,所以passport-local基于connect的  原理与流程在此大致梳理一下。
+passport-local代码及运转流程解析首先定义local验证的策略本地验证">
+<meta property="og:updated_time" content="2016-03-30T05:13:41.565Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="passport-local基于connect的验证流程解析">
+<meta name="twitter:description" content="概要之所以是passport-local基于connect的验证流程解析，是因为个人实例时没有用到express框架，但用到了TJ大神的node-connect。 个人的MVC框架是基于自然映射，也用到了connect去引入中间件,所以passport-local基于connect的  原理与流程在此大致梳理一下。
+passport-local代码及运转流程解析首先定义local验证的策略本地验证">
+  
+    <link rel="alternative" href="/atom.xml" title="CCJoe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ccjoe.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Joe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">那时候，车，马，朝阳...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/cao">每日糙点</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/build/" style="font-size: 12.5px;">build</a> <a href="/tags/co/" style="font-size: 10px;">co</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross-domain</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/flux/" style="font-size: 10px;">flux</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/gulp/" style="font-size: 12.5px;">gulp</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mvc/" style="font-size: 20px;">mvc</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/passport/" style="font-size: 10px;">passport</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/regExp/" style="font-size: 10px;">regExp</a> <a href="/tags/rest/" style="font-size: 12.5px;">rest</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/thunk/" style="font-size: 10px;">thunk</a> <a href="/tags/webapp/" style="font-size: 15px;">webapp</a> <a href="/tags/web优化/" style="font-size: 10px;">web优化</a> <a href="/tags/便笺/" style="font-size: 10px;">便笺</a> <a href="/tags/影评/" style="font-size: 10px;">影评</a> <a href="/tags/性能分析/" style="font-size: 10px;">性能分析</a> <a href="/tags/投资/" style="font-size: 10px;">投资</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/组件化/" style="font-size: 12.5px;">组件化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://developer.mozilla.org/zh-CN/">MDN</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.github.com/">Github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">理无常是，事无常非。 里面很多文章都是半完成式或在完善相关主题，仅作为作者整理思路， 读者见谅。</div>
+				</section>
+				
+			</div>
+
+		</div>
+			<div style="position:absolute; top:550px; width:100%; font-size:12px; line-height:22px;">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><a>所有皆原创</a> <br> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+			</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Joe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Joe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">那时候，车，马，朝阳...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/cao">每日糙点</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-passport-local基于connect的验证流程解析" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/31/passport-local基于connect的验证流程解析/" class="article-date">
+  	<time datetime="2015-07-31T03:33:36.000Z" itemprop="datePublished">2015-07-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      passport-local基于connect的验证流程解析
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/passport/">passport</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概要">概要</h2><p>之所以是passport-local基于connect的验证流程解析，是因为个人实例时没有用到express框架，但用到了TJ大神的node-connect。 个人的MVC框架是基于自然映射，也用到了connect去引入中间件,所以passport-local基于connect的  原理与流程在此大致梳理一下。</p>
+<h2 id="passport-local代码及运转流程解析">passport-local代码及运转流程解析</h2><h3 id="首先定义local验证的策略">首先定义local验证的策略</h3><p>本地验证需要二个字段usernameField， passwordField，其值为你想定义的验证字段。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> CB = <span class="function"><span class="keyword">function</span>(<span class="params">name, pwd, done</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// asynchronous verification, for effect...</span></span><br><span class="line">        process.nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            user.findOne(&#123;</span><br><span class="line">                name: name</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error, user</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(!user)&#123;</span><br><span class="line">                    <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>, &#123; message: <span class="string">'用户名或邮箱 '</span> + name + <span class="string">' 不存在'</span>&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(user.password !== pwd)&#123;</span><br><span class="line">                    <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>, &#123; message: <span class="string">'密码不匹配'</span> &#125;);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> done(<span class="literal">null</span>, user, info);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">passport.use(<span class="keyword">new</span> LocalStrategy(&#123;</span><br><span class="line">                <span class="comment">// options参数，用来设置你要验证的字段名称，即usernameField</span></span><br><span class="line">                usernameField: <span class="string">'name'</span>, <span class="comment">//如果用邮箱验证，则需要改成邮箱字段</span></span><br><span class="line">                passwordField: <span class="string">'pwd'</span></span><br><span class="line">            &#125;, CB));</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h3 id="定义session的序列化与反序列化">定义session的序列化与反序列化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将环境中的user.id序列化到session中，即sessionID，同时它将作为凭证存储在用户cookie中。</span></span><br><span class="line">passport.serializeUser(<span class="function"><span class="keyword">function</span>(<span class="params">user, done</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(user, <span class="string">'user'</span>);</span><br><span class="line">    done(<span class="literal">null</span>, user.name);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//将session反序列化，参数为用户提交的sessionID，若存在则从数据库中查询user并存储与req.user中</span></span><br><span class="line">passport.deserializeUser(<span class="function"><span class="keyword">function</span>(<span class="params">username, done</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(username, <span class="string">'username'</span>);</span><br><span class="line">    findByName(username, <span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">        done(err, user);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="验证登录请求">验证登录请求</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//验证登录请求</span></span><br><span class="line">validAuth: <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">     <span class="comment">//验证登录请求</span></span><br><span class="line">    passport.authenticate(<span class="string">'local'</span>, <span class="comment">//name 验证策略名称</span></span><br><span class="line">        <span class="comment">/*options</span><br><span class="line">          session：Boolean。设置是否需要session，默认为true</span><br><span class="line">          successRedirect：String。设置当验证成功时的跳转链接</span><br><span class="line">          failureRedirect：String。设置当验证失败时的跳转链接</span><br><span class="line">          failureFlash：Boolean or String。设置为Boolean时，express-flash将调用use()里设置的message。设置为String时将直接调用这里的信息。</span><br><span class="line">          successFlash：Boolean or String。使用方法同上。*/</span></span><br><span class="line">        <span class="comment">// &#123;   session: false,</span></span><br><span class="line">        <span class="comment">//     successRedirect: '/',</span></span><br><span class="line">        <span class="comment">//     failureRedirect: '/auth/login',</span></span><br><span class="line">        <span class="comment">//     // failureFlash: true</span></span><br><span class="line">        <span class="comment">// &#125;,</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span>(<span class="params">err, user, info</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (err) <span class="keyword">return</span> next(err);</span><br><span class="line">            <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">                req.session.messages =  [info.message];</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            req.logIn(user, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (err) <span class="keyword">return</span> next(err);</span><br><span class="line">                req.flash(<span class="string">'success'</span>, &#123;</span><br><span class="line">                    msg: <span class="string">'登录成功！'</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        )(req, res, next);</span><br><span class="line">    <span class="keyword">return</span> next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="验证逻辑流程">验证逻辑流程</h3><ol>
+<li>当path为登录页时，提交登录请求时通过validAuth去验证登录。</li>
+<li>validAuth的authenticate调用new LocalStrategy:<br> authenticate 为 ‘local’的方式触发 local验证的策略，调用new LocalStrategy的回调CB去查询DB验证用户登录信息<br> options即为{<pre><code>// options参数，用来设置你要验证的字段名称，即usernameField
+usernameField: &apos;name&apos;, //如果用邮箱验证，则需要改成邮箱字段
+passwordField: &apos;pwd&apos;
+</code></pre> }, verify即为new LocalStrategy的回调。</li>
+<li>回调CB根据查询情况状态返回done(err, user, info);</li>
+<li>done(err, user, info) 与 passport的 authenticate(passport, name, options, callback)的callback;<br>passport根据这套机制可以扩展其它策略去进行登录验证。这里仅是passpory-local的验证策略</li>
+<li>验证通过之后会对user的信息进行序列化与反序列化， 序列化与反序列化的字段为传进done的信息,在以上serializeUser中为user.name</li>
+</ol>
+<p>下面是部分源码解析<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Strategy(options, verify)&#123;</span><br><span class="line">  <span class="comment">// .....略</span></span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'local'</span>;      <span class="comment">//策略名称</span></span><br><span class="line">  <span class="keyword">this</span>._verify = verify;    <span class="comment">//verify即为new LocalStrategy的回调</span></span><br><span class="line">  <span class="keyword">this</span>._passReqToCallback = options.passReqToCallback;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Strategy.prototype.authenticate ＝ &#123;</span><br><span class="line">    <span class="comment">//根据情况用verify去验证</span></span><br><span class="line">    <span class="keyword">if</span> (self._passReqToCallback) &#123;</span><br><span class="line">      <span class="keyword">this</span>._verify(req, username, password, verified);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">this</span>._verify(username, password, verified);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//验证后根据验证情况去分发处理结果</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">verified</span>(<span class="params">err, user, info</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123; <span class="keyword">return</span> self.error(err); &#125;</span><br><span class="line">    <span class="keyword">if</span> (!user) &#123; <span class="keyword">return</span> self.fail(info); &#125;</span><br><span class="line">    self.success(user, info);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="下面是在实际应用中代码">下面是在实际应用中代码</h2><p>使用大致与官方示例一致, 个人验证模块代码如下，里面有比较详情的注释。<br>里面BEGIN-&gt;END代码段是passport-local所依赖，其它代码为个人框架代码，在其它地方要随之变化。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">'./config'</span>),</span><br><span class="line">    jc = <span class="built_in">require</span>(<span class="string">'./jc'</span>),</span><br><span class="line">    auth = <span class="built_in">require</span>(<span class="string">'./app/models/auth'</span>),</span><br><span class="line"><span class="comment">//BEGIN----------------------------------------------   </span></span><br><span class="line"><span class="keyword">var</span> passport = <span class="built_in">require</span>(<span class="string">'passport'</span>)</span><br><span class="line">   ,LocalStrategy = <span class="built_in">require</span>(<span class="string">'passport-local'</span>).Strategy</span><br><span class="line">   ,cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>)</span><br><span class="line">   ,bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>)</span><br><span class="line">   ,session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"><span class="comment">//END----------------------------------------------</span></span><br><span class="line"><span class="keyword">var</span> app = jc.app();</span><br><span class="line"><span class="comment">//权限策略初始化</span></span><br><span class="line">auth.init();</span><br><span class="line"></span><br><span class="line"><span class="comment">//BEGIN----------------------------------------------</span></span><br><span class="line"><span class="comment">//引入中间件</span></span><br><span class="line">app.use(cookieParser(<span class="comment">/*&#123;</span><br><span class="line">    name: 'session',</span><br><span class="line">    keys: ['secret1', 'secret2']</span><br><span class="line">&#125;*/</span>));</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">  app.use(bodyParser.urlencoded(&#123;</span><br><span class="line">    extended: <span class="literal">true</span></span><br><span class="line">  &#125;));</span><br><span class="line">app.use(session(&#123;secret: <span class="string">"need change"</span>&#125;));</span><br><span class="line">app.use(passport.initialize());</span><br><span class="line">app.use(passport.session());</span><br><span class="line"><span class="comment">// app.use(flash());</span></span><br><span class="line"><span class="comment">//END----------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//启动服务</span></span><br><span class="line">jc.server(app);</span><br></pre></td></tr></table></figure></p>
+<p>下面在详细方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> auth = &#123;</span><br><span class="line">    init: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        passport.use(<span class="keyword">new</span> LocalStrategy(&#123;</span><br><span class="line">                <span class="comment">// options参数，用来设置你要验证的字段名称，即usernameField</span></span><br><span class="line">                usernameField: <span class="string">'name'</span>, <span class="comment">//如果用邮箱验证，则需要改成邮箱字段</span></span><br><span class="line">                passwordField: <span class="string">'pwd'</span></span><br><span class="line">            &#125;, auth.AuthUser));</span><br><span class="line">        <span class="comment">//将环境中的user.id序列化到session中，即sessionID，同时它将作为凭证存储在用户cookie中。</span></span><br><span class="line">        passport.serializeUser(<span class="function"><span class="keyword">function</span>(<span class="params">user, done</span>) </span>&#123;</span><br><span class="line">            done(<span class="literal">null</span>, user.name);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将session反序列化，参数为用户提交的sessionID，若存在则从数据库中查询user并存储与req.user中</span></span><br><span class="line">        passport.deserializeUser(<span class="function"><span class="keyword">function</span>(<span class="params">id, done</span>) </span>&#123;</span><br><span class="line">            findById(id, <span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">                done(err, user);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//连接DB检查用户</span></span><br><span class="line">    AuthUser: <span class="function"><span class="keyword">function</span>(<span class="params">name, pwd, done</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// asynchronous verification, for effect...</span></span><br><span class="line">        process.nextTick(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(name, pwd, info, <span class="string">'UNPW'</span>);</span><br><span class="line">            user.findOne(&#123;</span><br><span class="line">                name: name</span><br><span class="line">            &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">error, user</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(error, user, <span class="string">'RUN DB'</span>);</span><br><span class="line">                <span class="keyword">if</span>(!user)&#123;</span><br><span class="line">                    <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>, &#123; message: <span class="string">'用户名或邮箱 '</span> + name + <span class="string">' 不存在'</span>&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(user.password !== pwd)&#123;</span><br><span class="line">                    <span class="keyword">return</span> done(<span class="literal">null</span>, <span class="literal">false</span>, &#123; message: <span class="string">'密码不匹配'</span> &#125;);</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="keyword">return</span> done(<span class="literal">null</span>, user, info);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//该用户是否存在于session中（即是否已登录）</span></span><br><span class="line">    isAuthenticated : <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (req.isAuthenticated()) <span class="keyword">return</span> next();</span><br><span class="line">      res.redirect(<span class="string">'/auth/login'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">//验证登录,并返回这个回调</span></span><br><span class="line">    validAuth: <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">         <span class="comment">//验证登录请求</span></span><br><span class="line">        passport.authenticate(<span class="string">'local'</span>, <span class="comment">//name 验证策略名称</span></span><br><span class="line">            <span class="comment">/*options</span><br><span class="line">              session：Boolean。设置是否需要session，默认为true</span><br><span class="line">              successRedirect：String。设置当验证成功时的跳转链接</span><br><span class="line">              failureRedirect：String。设置当验证失败时的跳转链接</span><br><span class="line">              failureFlash：Boolean or String。设置为Boolean时，express-flash将调用use()里设置的message。设置为String时将直接调用这里的信息。</span><br><span class="line">              successFlash：Boolean or String。使用方法同上。*/</span></span><br><span class="line">            <span class="comment">// &#123;   session: false,</span></span><br><span class="line">            <span class="comment">//     successRedirect: '/',</span></span><br><span class="line">            <span class="comment">//     failureRedirect: '/auth/login',</span></span><br><span class="line">            <span class="comment">//     // failureFlash: true</span></span><br><span class="line">            <span class="comment">// &#125;,</span></span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">err, user, info</span>) </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (err) <span class="keyword">return</span> next(err);</span><br><span class="line">                <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">                    req.session.messages =  [info.message];</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                req.logIn(user, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (err) <span class="keyword">return</span> next(err);</span><br><span class="line">                    req.flash(<span class="string">'success'</span>, &#123;</span><br><span class="line">                        msg: <span class="string">'登录成功！'</span></span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            )(req, res, next);</span><br><span class="line">        <span class="keyword">return</span> next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<hr>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/14/You-Dont-Need-jQuery/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          You Dont Need jQuery
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/23/一个极简但实用的MVC-nodejs框架/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">一个极简但实用的MVC nodejs框架</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="passport-local基于connect的验证流程解析" data-title="passport-local基于connect的验证流程解析" data-url="http://ccjoe.github.io/2015/07/31/passport-local基于connect的验证流程解析/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ccjoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Joe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/coraui.pgg.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

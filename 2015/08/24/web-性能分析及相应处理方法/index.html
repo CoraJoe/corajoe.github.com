@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>web 性能分析及相应处理方法 | CCJoe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一个Web应用的性能分析包含服务端的性能分析及浏览器端的性能分析,这里只罗列相关浏览器端（前端）的性能分析。
+
+总体来讲：终端用户响应时间        = 页面下载时间 + 服务器响应时间 + 浏览器处理及渲染时间        = 页面大小 / 网络带宽 + （网络延迟 × HTTP 请求数）/ 并发度 + 服务器响应时间 + 浏览器处理及渲染时间        http://www.ibm.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web 性能分析及相应处理方法">
+<meta property="og:url" content="http://ccjoe.github.io/2015/08/24/web-性能分析及相应处理方法/index.html">
+<meta property="og:site_name" content="CCJoe">
+<meta property="og:description" content="一个Web应用的性能分析包含服务端的性能分析及浏览器端的性能分析,这里只罗列相关浏览器端（前端）的性能分析。
+
+总体来讲：终端用户响应时间        = 页面下载时间 + 服务器响应时间 + 浏览器处理及渲染时间        = 页面大小 / 网络带宽 + （网络延迟 × HTTP 请求数）/ 并发度 + 服务器响应时间 + 浏览器处理及渲染时间        http://www.ibm.">
+<meta property="og:image" content="http://ccjoe.github.io/img/article/renderprocess.jpg">
+<meta property="og:updated_time" content="2016-03-30T05:13:41.581Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="web 性能分析及相应处理方法">
+<meta name="twitter:description" content="一个Web应用的性能分析包含服务端的性能分析及浏览器端的性能分析,这里只罗列相关浏览器端（前端）的性能分析。
+
+总体来讲：终端用户响应时间        = 页面下载时间 + 服务器响应时间 + 浏览器处理及渲染时间        = 页面大小 / 网络带宽 + （网络延迟 × HTTP 请求数）/ 并发度 + 服务器响应时间 + 浏览器处理及渲染时间        http://www.ibm.">
+<meta name="twitter:image" content="http://ccjoe.github.io/img/article/renderprocess.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="CCJoe" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/ccjoe.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Joe</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">那时候，车，马，朝阳...</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/cao">每日糙点</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+					        
+								<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/ajax/" style="font-size: 10px;">ajax</a> <a href="/tags/angular/" style="font-size: 10px;">angular</a> <a href="/tags/angularjs/" style="font-size: 10px;">angularjs</a> <a href="/tags/backbone/" style="font-size: 10px;">backbone</a> <a href="/tags/build/" style="font-size: 12.5px;">build</a> <a href="/tags/co/" style="font-size: 10px;">co</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross-domain</a> <a href="/tags/design-pattern/" style="font-size: 10px;">design pattern</a> <a href="/tags/facebook/" style="font-size: 10px;">facebook</a> <a href="/tags/flux/" style="font-size: 10px;">flux</a> <a href="/tags/generator/" style="font-size: 10px;">generator</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/google/" style="font-size: 10px;">google</a> <a href="/tags/grunt/" style="font-size: 10px;">grunt</a> <a href="/tags/gulp/" style="font-size: 12.5px;">gulp</a> <a href="/tags/iframe/" style="font-size: 10px;">iframe</a> <a href="/tags/javascript/" style="font-size: 17.5px;">javascript</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mvc/" style="font-size: 20px;">mvc</a> <a href="/tags/mvvm/" style="font-size: 10px;">mvvm</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/passport/" style="font-size: 10px;">passport</a> <a href="/tags/pattern/" style="font-size: 10px;">pattern</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/regExp/" style="font-size: 10px;">regExp</a> <a href="/tags/rest/" style="font-size: 12.5px;">rest</a> <a href="/tags/sort/" style="font-size: 10px;">sort</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/thunk/" style="font-size: 10px;">thunk</a> <a href="/tags/webapp/" style="font-size: 15px;">webapp</a> <a href="/tags/web优化/" style="font-size: 10px;">web优化</a> <a href="/tags/便笺/" style="font-size: 10px;">便笺</a> <a href="/tags/影评/" style="font-size: 10px;">影评</a> <a href="/tags/性能分析/" style="font-size: 10px;">性能分析</a> <a href="/tags/投资/" style="font-size: 10px;">投资</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/电影/" style="font-size: 10px;">电影</a> <a href="/tags/组件化/" style="font-size: 12.5px;">组件化</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://developer.mozilla.org/zh-CN/">MDN</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.github.com/">Github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">理无常是，事无常非。 里面很多文章都是半完成式或在完善相关主题，仅作为作者整理思路， 读者见谅。</div>
+				</section>
+				
+			</div>
+
+		</div>
+			<div style="position:absolute; top:550px; width:100%; font-size:12px; line-height:22px;">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><br /><a>所有皆原创</a> <br> 本作品采用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>进行许可。
+			</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Joe</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/avatar.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Joe</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">那时候，车，马，朝阳...</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/cao">每日糙点</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/ccjoe" title="github">github</a>
+			        
+						<a class="zhihu" target="_blank" href="http://www.zhihu.com/people/chu0" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-web-性能分析及相应处理方法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/24/web-性能分析及相应处理方法/" class="article-date">
+  	<time datetime="2015-08-24T08:56:39.000Z" itemprop="datePublished">2015-08-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web 性能分析及相应处理方法
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webapp/">webapp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web优化/">web优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/性能分析/">性能分析</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一个Web应用的性能分析包含服务端的性能分析及浏览器端的性能分析,这里只罗列相关浏览器端（前端）的性能分析。</p>
+<blockquote>
+<p>总体来讲：终端用户响应时间<br>        = 页面下载时间 + 服务器响应时间 + 浏览器处理及渲染时间<br>        = 页面大小 / 网络带宽 + （网络延迟 × HTTP 请求数）/ 并发度 + 服务器响应时间 + 浏览器处理及渲染时间<br>        <a href="http://www.ibm.com/developerworks/cn/lotus/web20-perf-2/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/lotus/web20-perf-2/</a></p>
+</blockquote>
+<p>并行下来即有以下因素影响浏览器响应时间:</p>
+<h2 id="A-页面下载时间">A:页面下载时间</h2><p>页面下载时间的模型涉及三方面：</p>
+<ul>
+<li>互联网应用的网络传输行为 : 它包括这个互联网应用通过浏览器发出了多少个 HTTP 请求，页面大小（HTTP 响应的总和），同时有多少个 HTTP 连接，这个互联网应用是如何并发使用这些 HTTP 连接的，等等。<br>  关键点：HTTP请求，页面大小，HTTP连接并发数</li>
+<li>网络参数 : 网络参数一般可以用QoS (Quality of Service)来描述，Qos包括带宽、延迟、丢包率等等一系列参数。但简化的说，带宽和网络延迟是最主要的因素。</li>
+<li>页面下载时间 : 终端用户响应时间就是指从这个用户触发一个页面请求到这个页面被完全展示时，有多少时间是花费在网络传输上。</li>
+</ul>
+<p>根据以上要素总结的优化点：</p>
+<ol>
+<li>处理页面大小（压缩html,css,js,image,svg,font…, GZIP）</li>
+<li>处理Http请求数 (合并css,js,image,svg,font…文件, 缓存http请求)</li>
+<li>处理HTTP连接并发数(尽量提高并发量，但尽量减少不同域的资源的请求及连接，即减少域名查询。)</li>
+</ol>
+<a id="more"></a>
+<p><br><br></p>
+<h2 id="B-服务器响应时间">B:服务器响应时间</h2><p><br><br></p>
+<h2 id="C-页面渲染时间-脚本执行时间-浏览器引擎渲染时间">C:页面渲染时间(脚本执行时间 + 浏览器引擎渲染时间)</h2><p><br></p>
+<h3 id="C1-脚本执行时间">C1:脚本执行时间</h3><p>“脚本执行时间” 包含浏览器脚本执行引擎解析和执行JavaScript脚本的时间。<br><br></p>
+<h3 id="C2-浏览器引擎渲染时间（加载，解析，渲染）">C2:浏览器引擎渲染时间（加载，解析，渲染）</h3><p>“浏览器引擎渲染时间” 包含浏览器引擎渲染和显示图形界面 UI 的时间。根据以上要素总结的优化要点是：<br><br></p>
+<p>####. C2.1 优化脚本执行效率：(脚本执行中性能比较差的方法或算法)</p>
+<ul>
+<li>分析方法所执行的时间</li>
+<li>分析方法被调用的流程</li>
+</ul>
+<p><br></p>
+<p>####. C2.2 影响浏览器引擎渲染时间的因素（加载，解析，渲染）<br><img src="/img/article/renderprocess.jpg" alt="浏览器引擎渲染流程" title="浏览器引擎渲染流程"> </p>
+<h6 id="第一类：加载时浏览器引擎加载次序影响的渲染：如css需要放入head-js放入body尾部">第一类：<code>加载时</code>浏览器引擎加载次序影响的渲染：如css需要放入head,js放入body尾部</h6><h6 id="第二类：解析时浏览器引擎解析dom树-css规则-js对性能的影响，具体表现在例如：">第二类：<code>解析时</code>浏览器引擎解析dom树,css规则,js对性能的影响，具体表现在例如：</h6><p>解析包含三层的东西：<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">一个是HTML/SVG/XHTML</span><br><span class="line">CSS，解析CSS会产生CSS规则树</span><br><span class="line">Javascript，脚本，主要是通过DOM API和CSSOM API来操作DOM <span class="built_in">Tree</span>和CSS Rule <span class="built_in">Tree</span>.</span><br></pre></td></tr></table></figure></p>
+<p>相关解析时需要注意的或优化点是:</p>
+<ul>
+<li>dom深度过高对于解析的影响</li>
+<li>内联的表现层的css与行为层js对于解析的影响</li>
+<li>css表达式的滥用对css规则的解析等</li>
+<li>很多的通配符等。<blockquote>
+<p>注意：CSS匹配HTML元素是一个相当复杂和有性能问题的事情。所以，你就会在N多地方看到很多人都告诉你，DOM树要小，CSS尽量用id和class，千万不要过渡层叠下去，……</p>
+</blockquote>
+</li>
+</ul>
+<p>解析完成后浏览器引擎会通过DOM Tree 和 CSS Rule Tree 来构造 Rendering Tree，进入<code>渲染</code></p>
+<h5 id="第三类：渲染时减少”重绘“、”重新布局“的消耗：">第三类：<code>渲染时</code>减少”重绘“、”重新布局“的消耗：</h5><p>渲染时流程：<br><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">计算CSS样式</span><br><span class="line">构建Render Tree</span><br><span class="line">Layout – 定位坐标和大小，是否换行，各种<span class="attribute">position</span>, <span class="attribute">overflow</span>, <span class="attribute">z-index</span>属性 ……</span><br><span class="line">正式开画</span><br></pre></td></tr></table></figure></p>
+<p>渲染时的两个重要概念，一个是Reflow，另一个是Repaint:</p>
+<ul>
+<li>Repaint——屏幕的一部分要重画，比如某个CSS的背景色变了。但是元素的几何尺寸没有变。</li>
+<li>Reflow——意味着元件的几何尺寸变了，我们需要重新验证并计算Render Tree。是Render Tree的一部分或全部发生了变化。这就是Reflow，或是Layout。</li>
+</ul>
+<p>所以Reflow的成本比Repaint的成本高得多的多，如下动作可能会引起reflow：</p>
+<ul>
+<li>当你增加、删除、修改DOM结点时，会导致Reflow或Repaint</li>
+<li>当你移动DOM的位置，或是搞个动画的时候。</li>
+<li>当你修改CSS样式的时候。</li>
+<li>当你Resize窗口的时候（移动端没有这个问题），或是滚动的时候。</li>
+<li>当你修改网页的默认字体时。</li>
+</ul>
+<p>与渲染相关的优化如： </p>
+<ul>
+<li>js: 不要<code>document.write</code>重写dom;  把DOM离线后(脱离文档树后)修改; 不要一条一条地修改DOM的样式。与其这样，还不如预先定义好css的class，然后修改DOM的className……</li>
+<li>css: <code>position</code>,为动画的HTML元件使用fixed或absoult，那么修改他们的CSS是不会reflow的;<code>display:none</code>会触发<code>reflow</code>，而<code>visibility:hidden</code>只会触发<code>repaint</code>……</li>
+<li><code>img</code>指定图像和<code>table</code>的大小……,避免使用table布局。因为可能很小的一个小改动会造成整个table的重新布局。</li>
+<li><code>svg,canvas</code>元素等等的优化处理……</li>
+</ul>
+<hr>
+
+<p><strong>参考：<br><a href="http://www.ibm.com/developerworks/cn/lotus/web20-perf-3/" target="_blank" rel="external">浏览器渲染时间分析</a><br><a href="http://www.jianshu.com/p/e141d1543143" target="_blank" rel="external">浏览器~加载，解析，渲染</a></strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/25/javascript正则表达式之场景分析示例/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          javascript正则表达式之场景分析示例
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/19/Js排序相关/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Js排序相关...</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="web-性能分析及相应处理方法" data-title="web 性能分析及相应处理方法" data-url="http://ccjoe.github.io/2015/08/24/web-性能分析及相应处理方法/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"ccjoe"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Joe
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+
+<script>
+	var yiliaConfig = {
+		fancybox: false,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/coraui.pgg.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+  </div>
+</body>
+</html>

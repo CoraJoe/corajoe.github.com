@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>viewbind.js Demo</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        xmp{color: #999}
+        ol{
+            position: relative;
+            display: block;
+            padding: 2px 50px;
+            margin-bottom: -1px;
+            background-color: #fefefe;
+            border: 1px solid #ddd;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <div class="page-header">
+      <h1>ViewBind.js <small>for guide, base on jQuery bi-bind</small></h1>
+    </div>
+
+    <h2>绑定的指令 directive provided</h2>
+    <pre>
+    ```
+    vb-modalname="key"      组件块的modalname绑定
+    vb-model="key"          表单元素的双向绑定
+    vb-item="subKey"        数组遍历时的值绑定
+
+    vb-if vb-show vb-hide   显隐与存在
+    vb-value                为元素绑定添加value属性
+    vb-class                条件class
+    vb-entity               将值转化为实体
+    vb-cloak                解析前不显示
+    ```
+    </pre>
+
+    <h2>Demo1: Dead Simple Example</h2>
+    <div  id="demo1" class="row">
+      <div class="col-md-4">
+          <p class="badge">html</p>
+          <xmp>
+<p>
+    <span>age:</span>
+    <span vb-user="age"></span>
+</p>
+<input vb-user="age">
+</xmp>
+      </div>
+      <div class="col-md-4">
+          <p class="badge">js</p>
+          <xmp>
+var vb1 = new ViewBind({
+    modelId: 'user',
+    $el: '#demo1',
+    data: { name: 'joe', age: 18 }
+});
+</xmp>
+      </div>
+      <div class="col-md-4">
+        <p><span>age:</span><span vb-user="age"></span></p>
+        <input vb-user="age">
+      </div>
+    </div>    
+
+    <h2>Demo2: Render List</h2>
+    <div class="row">
+      <div class="col-md-4">
+          <p class="badge">html</p>
+          <xmp>
+ <div id="demo2">
+     <ul class="list-group" vb-user="users">
+      <li class="list-group-item">
+        <strong vb-item="name"></strong> 
+        <span vb-item="age"></span>
+      </li>
+    </ul>
+</div>
+          </xmp>
+      </div>
+      <div class="col-md-4">
+          <p class="badge">js</p>
+<xmp>
+var vb2 = new ViewBind({
+    modelId: 'user',
+    $el: '#demo2',
+    data: { 
+        users: [{
+            name: 'joe', age: 18
+        }, {
+            name: 'kate', age: 22
+        }, {
+            name: 'laowang', age: 5
+        }]
+    }
+});
+</xmp>
+      </div>
+      <div class="col-md-4">
+         <div id="demo2">
+             <ul class="list-group" vb-user="users">
+              <li class="list-group-item">
+                <strong vb-item="name"></strong> <span vb-item="age"></span> <span vb-item="sex"></span>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>    
+
+    <h2>Demo3: Render Nested List</h2>
+    <div class="row">
+      <div class="col-md-4">
+          <p class="badge">html</p>
+          <xmp>
+ <div id="demo3">
+     <h5 vb-user="title"></h5>
+     <ul class="list-group" vb-user="users">
+      <li class="list-group-item">
+        <strong vb-item="name"></strong> 
+        <span vb-item="age"></span> 
+        <span vb-item="sex"></span>
+      </li>
+      <ol class="sub" vb-item="children">
+        <li>
+            <strong vb-item="name"></strong> 
+            <span vb-item="age"></span>
+        </li>
+      </ol>
+    </ul>
+</div>
+          </xmp>
+      </div>
+      <div class="col-md-4">
+          <p class="badge">js</p>
+<xmp>
+var vb3 = new ViewBind({
+    modelId: 'user',
+    $el: '#demo2',
+    data: { 
+        title: 'this is a Render Nested List demo',
+        users: [{
+            name: 'joe', age: 18, sex: 1,
+            children: [{
+                name: 'subjoe',
+                age: 5
+            }]
+        }, {
+            name: 'kate', age: 22, sex: 0,
+            children: [{
+                name: 'subjoe',
+                age: 5
+            }, {
+                name: 'everyone',
+                age: 3
+            }]
+        }]
+    },
+    entity: {
+        'sex': function(value) { return value === 1 ? 'male' : 'female'; }
+    }
+});
+</xmp>
+      </div>
+      <div class="col-md-4">
+         <div id="demo3">
+             <h5 vb-user="title"></h5>
+             <ul class="list-group" vb-user="users">
+              <li class="list-group-item">
+                <strong vb-item="name"></strong> <span vb-item="age"></span> <span vb-item="sex"></span>
+              </li>
+              <ol class="sub" vb-item="children">
+                <li><strong vb-item="name"></strong> <span vb-item="age"></span> <span vb-item="sex"></span></li>
+              </ol>
+            </ul>
+        </div>
+      </div>
+    </div>
+    
+    <h2>Demo4: partial and global update components</h2>
+    <div class="row">
+        <div class="col-md-6">
+<xmp>
+partial update: vb3.set('title', 'this is updated title');
+global update:  vb3.set(updateVB3Data);
+</xmp> 
+        </div>
+        <div class="col-md-6">
+            <div class="btn-group-vertical" role="group" aria-label="...">
+              <button  onclick="vb3.set('title', 'this is updated title');" type="button" class="btn btn-default">partial update demo3's title</button>
+              <button  onclick="vb3.set(updateVB3Data);"  type="button" class="btn btn-default">global update demo3's components</button>
+            </div>
+        </div>
+    </div>
+
+    <h2>Demo5: Form bind</h2>
+    <p>form type elements use vb-modelname="key" for bi-bind vb.data.key, and has vb-model="key2" to sync with key</p>
+    <div class="row">
+        <div class="col-md-4">
+            <p class="badge">html</p>
+<xmp>
+<input type="text" vb-formdemo="selectedValue">
+<select vb-formdemo="selectList" 
+        vb-model="selectedValue" vb-key="id">
+    <option vb-value="$values.id"  vb-item="name">
+    </option>
+    <span>选择的值是(selected value is):</span>
+    <span vb-formdemo="selectedValue"></span>
+</select>
+</xmp> 
+        </div>
+        <div class="col-md-4">
+        <p class="badge">js</p>
+<xmp>
+var vb5 = new ViewBind({
+    modelId: 'formdemo',
+    $el: '#demo5',
+    data:{
+        selectList: [{name: 'joe', id:1},
+                     {name: 'smith', id:2},
+                     {name: 'blue', id:3}]
+        selectedValue: 2
+    }
+})
+</xmp>     
+        </div>        
+        <div class="col-md-4" id="demo5">
+
+                <select class="form-control" name="" id="province" vb-formdemo="selectList" vb-model="selectedValue" vb-key="id">
+                    <option vb-value="$values.id" vb-item="name"></option>
+                </select> <br>
+                <input class="form-control" type="text" vb-formdemo="selectedValue"> <br>
+                <span>选择的值是(selected value is):</span><span vb-formdemo="selectedValue"></span>
+        </div>
+    </div>    
+
+    <h2>Demo6: A full components code</h2>
+    <pre>    
+    new ViewBind({
+        modelId: 'user',
+        $el: '#root',
+        data: { name: 'joe', age: 18 },
+        entity: { 
+           //u can alse user entity for this ViewBind or user vb-entity="value === 1 ? 'male' : 'female'"
+           'sex': function(value) { return value === 1 ? 'male' : 'female'; } 
+        },
+        events: {
+            'click .user': 'setUser',
+            'click .pwd': function(e, elem, that) {}
+        },
+        watch:{
+            'age': function(newval, oldval){}
+        },
+        created: function(){},  //before render
+        attached: function(){}, //after render
+        setUser: function(e, elem) {}
+    });
+    </pre>
+
+
+    <script src="http://cdn.bootcss.com/jquery/1.8.3/jquery.js"></script>
+    <script src="./viewbind.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    var vb1 =  new ViewBind({
+        modelId: 'user',
+        $el: '#demo1',
+        data: { name: 'joe', age: 18 }
+    });
+
+    var vb2 = new ViewBind({
+        modelId: 'user',
+        $el: '#demo2',
+        data: { 
+            users: [{
+                name: 'joe', age: 18
+            }, {
+                name: 'kate', age: 22
+            }, {
+                name: 'laowang', age: 5
+            }]
+        }
+    });
+
+    var updateVB3Data = { //初始数据
+        title: 'this is global update title for demo4',
+        users: [{
+            name: 'update_joe',
+            age: 18,
+            sex: 1
+        }]
+    };
+
+    var vb3 = new ViewBind({
+        modelId: 'user',
+        $el: '#demo3',
+        data: { //初始数据
+            title: 'this is a Render Nested List demo',
+            users: [{
+                name: 'joe1',
+                age: 18,
+                sex: 1,
+                children: [{
+                    name: 'subjoe11',
+                    age: 18
+                }]
+            }, {
+                name: 'joe2',
+                age: 23,
+                sex: 0,
+                children: [{
+                    name: 'subjoe12',
+                    age: 19
+                }, {
+                    name: 'subjoe22',
+                    age: 18
+                }]
+            }]
+        },
+        //u can user entity for this ViewBind or user vb-entity="value === 1 ? 'male' : 'female'"
+        entity: {
+            'sex': function(value) {
+                return value === 1 ? 'male' : 'female';
+            }
+        },
+        events: {
+            'click .user': 'setUser',
+            'click .pwd': function(e, elem, that) {
+                that.set('pwd', 'click .pwd');
+                // console.log(e, elem, that, 'this elem events');
+            }
+        },
+        setUser: function(e, elem) {
+            this.set('name', 'clicksetUser');
+            // console.log(e, elem, this, 'this elem events');
+        }
+    });
+
+    var vb5 = new ViewBind({
+        modelId: 'formdemo',
+        $el: '#demo5',
+        data:{
+            selectList: [{name: 'joe', id:1},{name: 'smith', id:2},{name: 'blue', id:3}],
+            selectedValue: 2
+        }
+    })
+    </script>
+</body>
+</html>
